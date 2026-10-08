@@ -381,40 +381,151 @@
     }
   };
 
-  // ---------- Preguntas (intercaladas por categoría) ----------
-  const QUESTIONS = [
-    { cat: "horizonte", text: "Si hoy inviertes un dinero, ¿para cuándo crees que lo vas a necesitar?",
-      options: [ { label: "En menos de 1 año.", v: "corto" }, { label: "Entre 1 y 5 años.", v: "medio" }, { label: "En más de 5 años, o no tengo pensado usarlo pronto.", v: "largo" } ] },
-    { cat: "filosofia", text: "Vas a comprar un auto usado. ¿Cuál eliges?",
-      options: [
-        { label: "Uno de buena marca con un pequeño golpe, a un precio muy por debajo de lo que vale.", v: "value" },
-        { label: "El modelo más nuevo, con la tecnología que todos van a querer, aunque cueste más.", v: "growth" },
-        { label: "Uno sencillo que puedas rentar los fines de semana para que te genere dinero extra.", v: "dividendos" } ] },
-    { cat: "gestion", text: "Tienes un sábado libre. ¿Qué prefieres hacer con tus inversiones?",
-      options: [ { label: "Leer noticias de empresas, revisar números y buscar oportunidades.", v: "activa" }, { label: "Nada. Prefiero que funcionen solas mientras disfruto mi día.", v: "pasiva" } ] },
-    { cat: "filosofia", text: "Te ofrecen ser socio de un negocio. ¿Cuál te convence más?",
-      options: [
-        { label: "Una panadería con 30 años y clientes fieles, que se vende barata porque el dueño se retira.", v: "value" },
-        { label: "Una app nueva que crece muy rápido cada año, aunque todavía no gana dinero.", v: "growth" },
-        { label: "Una lavandería estable que reparte ganancias a sus socios todos los meses.", v: "dividendos" } ] },
-    { cat: "horizonte", text: "¿Cuál de estas metas se parece más a la tuya?",
-      options: [ { label: "Un viaje o una compra que quiero hacer pronto.", v: "corto" }, { label: "Juntar la prima de una casa, un carro o pagar mis estudios.", v: "medio" }, { label: "Mi retiro o lograr libertad financiera algún día.", v: "largo" } ] },
-    { cat: "gestion", text: "¿Qué forma de invertir te suena mejor?", term: "Fondo indexado (ETF)",
-      options: [ { label: "Elegir yo mismo cada empresa en la que pongo mi dinero.", v: "activa" }, { label: "Comprar una \"canasta\" que incluye cientos de empresas a la vez (un fondo indexado).", v: "pasiva" },
-        { label: "Las dos: la mayor parte en una canasta y unas pocas empresas elegidas por mí.", v: "activa+pasiva" } ] },
-    { cat: "filosofia", text: "¿Qué frase te representa más?",
-      options: [ { label: "\"Compra barato lo que vale mucho.\"", v: "value" }, { label: "\"Apuesta por lo que viene.\"", v: "growth" }, { label: "\"Que el dinero trabaje y me pague un sueldo.\"", v: "dividendos" } ] },
-    { cat: "horizonte", text: "Tu inversión baja 15% en una semana. ¿Qué haces?", hint: "No hay respuesta correcta: piensa en lo que harías de verdad.",
-      options: [ { label: "Vendo para no perder más: voy a necesitar ese dinero pronto.", v: "corto" }, { label: "Espero unos meses a ver si se recupera.", v: "medio" }, { label: "No hago nada, o incluso compro más. Faltan muchos años.", v: "largo" } ] },
-    { cat: "gestion", text: "¿Cuánto tiempo a la semana puedes dedicarle a tus inversiones?",
-      options: [ { label: "Varias horas. Me gusta aprender y analizar.", v: "activa" }, { label: "Menos de 30 minutos. Tengo otras prioridades.", v: "pasiva" } ] },
-    { cat: "filosofia", text: "Una acción que te gusta baja 30% en un mes. ¿Qué es lo primero que piensas?", term: "Dividendo",
-      options: [ { label: "\"Si la empresa sigue sana, ahora está en oferta.\"", v: "value" }, { label: "\"¿Sigue creciendo? Si es así, el precio de hoy no me preocupa.\"", v: "growth" }, { label: "\"¿Sigue pagando su dividendo? Eso es lo que me importa.\"", v: "dividendos" } ] },
-    { cat: "horizonte", text: "¿Cada cuánto te gustaría ver resultados de tu inversión?",
-      options: [ { label: "Cada semana o cada mes.", v: "corto" }, { label: "Cada uno o dos años.", v: "medio" }, { label: "Puedo esperar una década sin problema.", v: "largo" } ] },
-    { cat: "gestion", text: "¿Crees que puedes encontrar oportunidades que la mayoría no ve?",
-      options: [ { label: "Sí. Con estudio y esfuerzo puedo lograrlo.", v: "activa" }, { label: "Prefiero ganar lo mismo que el mercado, con menos trabajo y menos comisiones.", v: "pasiva" } ] }
+  // ---------- Banco de preguntas ----------
+  // 12 posiciones (intercaladas por categoría). Cada posición mide lo mismo con varias versiones:
+  // en cada intento se elige una versión al azar y se mezcla el orden de las respuestas.
+  const SLOTS = [
+    { cat: "horizonte", variants: [
+      { text: "Si hoy inviertes un dinero, ¿para cuándo crees que lo vas a necesitar?",
+        options: [ { label: "En menos de 1 año.", v: "corto" }, { label: "Entre 1 y 5 años.", v: "medio" }, { label: "En más de 5 años, o no tengo pensado usarlo pronto.", v: "largo" } ] },
+      { text: "Te llega un bono de L 10,000 y decides invertirlo. ¿Cuándo crees que lo vas a usar?",
+        options: [ { label: "En unos meses, para algo que ya tengo planeado.", v: "corto" }, { label: "En 2 o 3 años, para una meta importante.", v: "medio" }, { label: "No lo pienso tocar en muchos años.", v: "largo" } ] },
+      { text: "Si tu inversión no se pudiera retirar por un tiempo, ¿cuánto podrías esperar sin problema?",
+        options: [ { label: "Unos meses, como máximo.", v: "corto" }, { label: "Entre 1 y 5 años.", v: "medio" }, { label: "Más de 5 años. No me afectaría.", v: "largo" } ] }
+    ] },
+    { cat: "filosofia", variants: [
+      { text: "Vas a comprar un carro usado. ¿Cuál eliges?",
+        options: [
+          { label: "Uno de buena marca con un pequeño golpe, a un precio muy por debajo de lo que vale.", v: "value" },
+          { label: "El modelo más nuevo, con la tecnología que todos van a querer, aunque cueste más.", v: "growth" },
+          { label: "Uno sencillo que puedas rentar los fines de semana para que te genere dinero extra.", v: "dividendos" } ] },
+      { text: "Vas a comprar una propiedad. ¿Cuál te convence más?",
+        options: [
+          { label: "Una casa en buena zona que necesita reparaciones, muy por debajo del precio normal.", v: "value" },
+          { label: "Un terreno en una zona que crece rápido y que podría valer mucho más en unos años.", v: "growth" },
+          { label: "Un apartamento listo para alquilar que te pague una renta cada mes.", v: "dividendos" } ] },
+      { text: "Vas a comprar una moto. ¿Cuál eliges?",
+        options: [
+          { label: "Una usada de buena marca, en buen estado, a precio de remate.", v: "value" },
+          { label: "Una eléctrica nueva, con tecnología del futuro, aunque sea más cara.", v: "growth" },
+          { label: "Una sencilla para trabajar haciendo entregas y ganar dinero cada semana.", v: "dividendos" } ] }
+    ] },
+    { cat: "gestion", variants: [
+      { text: "Tienes un sábado libre. ¿Qué prefieres hacer con tus inversiones?",
+        options: [ { label: "Leer noticias de empresas, revisar números y buscar oportunidades.", v: "activa" }, { label: "Nada. Prefiero que funcionen solas mientras disfruto mi día.", v: "pasiva" } ] },
+      { text: "Sale una noticia importante sobre una empresa en la que invertiste. ¿Qué haces?",
+        options: [ { label: "La leo completa y analizo si debo comprar más o vender.", v: "activa" }, { label: "No hago nada. Mi plan es de largo plazo y no depende de una noticia.", v: "pasiva" } ] },
+      { text: "¿Cómo te imaginas revisando tus inversiones?",
+        options: [ { label: "Varias veces al mes, ajustando y buscando nuevas oportunidades.", v: "activa" }, { label: "Una o dos veces al año, solo para confirmar que todo sigue en orden.", v: "pasiva" } ] }
+    ] },
+    { cat: "filosofia", variants: [
+      { text: "Te ofrecen ser socio de un negocio. ¿Cuál te convence más?",
+        options: [
+          { label: "Una panadería con 30 años y clientes fieles, que se vende barata porque el dueño se retira.", v: "value" },
+          { label: "Una app nueva que crece muy rápido cada año, aunque todavía no gana dinero.", v: "growth" },
+          { label: "Una lavandería estable que reparte ganancias a sus socios todos los meses.", v: "dividendos" } ] },
+      { text: "Un amigo te invita a invertir en uno de sus tres negocios. ¿Cuál eliges?",
+        options: [
+          { label: "Una ferretería con buena clientela que hoy se vende barata porque tuvo un mal año.", v: "value" },
+          { label: "Una tienda en línea pequeña que duplica sus ventas cada año.", v: "growth" },
+          { label: "Una pulpería estable que reparte ganancias cada mes.", v: "dividendos" } ] },
+      { text: "Vas a invertir en un negocio de café. ¿Cuál te llama más la atención?",
+        options: [
+          { label: "Una finca tradicional con buen grano, que se vende por debajo de lo que vale.", v: "value" },
+          { label: "Una cafetería moderna que abre una sucursal nueva cada pocos meses.", v: "growth" },
+          { label: "Una exportadora estable que paga a sus socios cada trimestre.", v: "dividendos" } ] }
+    ] },
+    { cat: "horizonte", variants: [
+      { text: "¿Cuál de estas metas se parece más a la tuya?",
+        options: [ { label: "Un viaje o una compra que quiero hacer pronto.", v: "corto" }, { label: "Juntar la prima de una casa, un carro o pagar mis estudios.", v: "medio" }, { label: "Mi retiro o lograr libertad financiera algún día.", v: "largo" } ] },
+      { text: "Imagina que ya lograste tu meta con tus inversiones. ¿Cuál fue?",
+        options: [ { label: "Me di un gusto que quería este año.", v: "corto" }, { label: "Pagué la prima de mi casa o de mi carro.", v: "medio" }, { label: "Puedo vivir de mis inversiones sin depender de un salario.", v: "largo" } ] },
+      { text: "¿Para qué estás aprendiendo a invertir?",
+        options: [ { label: "Para hacer crecer un dinero que voy a usar pronto.", v: "corto" }, { label: "Para un proyecto de los próximos años: boda, estudios o negocio.", v: "medio" }, { label: "Para construir patrimonio y asegurar mi futuro.", v: "largo" } ] }
+    ] },
+    { cat: "gestion", variants: [
+      { text: "¿Qué forma de invertir te suena mejor?", term: "Fondo indexado (ETF)",
+        options: [ { label: "Elegir yo mismo cada empresa en la que pongo mi dinero.", v: "activa" }, { label: "Comprar una \"canasta\" que incluye cientos de empresas a la vez (un fondo indexado).", v: "pasiva" },
+          { label: "Las dos: la mayor parte en una canasta y unas pocas empresas elegidas por mí.", v: "activa+pasiva" } ] },
+      { text: "Tienes que armar un equipo de fútbol para ganar el torneo. ¿Cómo lo haces?", hint: "Invertir funciona parecido: puedes escoger cada pieza o comprar el paquete completo.",
+        options: [ { label: "Escojo yo a cada jugador después de analizarlos.", v: "activa" }, { label: "Uso una selección ya armada con los mejores del país.", v: "pasiva" },
+          { label: "Uso la selección como base y agrego un par de jugadores escogidos por mí.", v: "activa+pasiva" } ] },
+      { text: "Vas a preparar la cena del fin de semana. ¿Qué prefieres?", hint: "Invertir funciona parecido: puedes escoger cada ingrediente o comprar el combo completo.",
+        options: [ { label: "Cocinar desde cero, escogiendo cada ingrediente.", v: "activa" }, { label: "Pedir un combo completo que ya sé que es bueno.", v: "pasiva" },
+          { label: "Pedir el combo y prepararle un acompañamiento propio.", v: "activa+pasiva" } ] }
+    ] },
+    { cat: "filosofia", variants: [
+      { text: "¿Qué frase te representa más?",
+        options: [ { label: "\"Compra barato lo que vale mucho.\"", v: "value" }, { label: "\"Apuesta por lo que viene.\"", v: "growth" }, { label: "\"Que el dinero trabaje y me pague un sueldo.\"", v: "dividendos" } ] },
+      { text: "¿Cuál de estos consejos guardarías?",
+        options: [ { label: "\"Lo bueno y barato existe; hay que saber buscarlo.\"", v: "value" }, { label: "\"El mayor riesgo es quedarse fuera de lo que viene.\"", v: "growth" }, { label: "\"Mejor un ingreso seguro cada mes que una promesa grande.\"", v: "dividendos" } ] },
+      { text: "Si tu inversión fuera un árbol, ¿cuál sería?",
+        options: [ { label: "Un árbol grande que conseguiste a precio de arbusto.", v: "value" }, { label: "Un árbol joven que crece rapidísimo.", v: "growth" }, { label: "Un árbol frutal que te da cosecha cada temporada.", v: "dividendos" } ] }
+    ] },
+    { cat: "horizonte", variants: [
+      { text: "Tu inversión baja 15% en una semana. ¿Qué haces?", hint: "No hay respuesta correcta: piensa en lo que harías de verdad.",
+        options: [ { label: "Vendo para no perder más: voy a necesitar ese dinero pronto.", v: "corto" }, { label: "Espero unos meses a ver si se recupera.", v: "medio" }, { label: "No hago nada, o incluso compro más. Faltan muchos años.", v: "largo" } ] },
+      { text: "Las noticias dicen que la bolsa podría caer este año. ¿Qué haces con tu inversión?", hint: "No hay respuesta correcta: piensa en lo que harías de verdad.",
+        options: [ { label: "La retiro ahora. No quiero arriesgar ese dinero.", v: "corto" }, { label: "Bajo un poco el riesgo y espero a ver qué pasa.", v: "medio" }, { label: "Sigo igual. En 10 años esto será un mal recuerdo.", v: "largo" } ] },
+      { text: "Pasan 6 meses y tu inversión sigue igual, sin ganancias. ¿Cómo te sientes?",
+        options: [ { label: "Frustrado: esperaba ver resultados ya.", v: "corto" }, { label: "Un poco impaciente, pero le doy uno o dos años más.", v: "medio" }, { label: "Tranquilo: el crecimiento de verdad toma años.", v: "largo" } ] }
+    ] },
+    { cat: "gestion", variants: [
+      { text: "¿Cuánto tiempo a la semana puedes dedicarle a tus inversiones?",
+        options: [ { label: "Varias horas. Me gusta aprender y analizar.", v: "activa" }, { label: "Menos de 30 minutos. Tengo otras prioridades.", v: "pasiva" } ] },
+      { text: "¿Qué te gustaría aprender primero?",
+        options: [ { label: "Cómo analizar una empresa y saber si está barata o cara.", v: "activa" }, { label: "Cómo armar un plan automático con fondos indexados.", v: "pasiva" } ] },
+      { text: "Si invertir fuera un deporte, ¿cómo lo vivirías?",
+        options: [ { label: "Como jugador: quiero estar en la cancha tomando decisiones.", v: "activa" }, { label: "Como aficionado: confío en el equipo y veo el resultado al final.", v: "pasiva" } ] }
+    ] },
+    { cat: "filosofia", variants: [
+      { text: "Una acción que te gusta baja 30% en un mes. ¿Qué es lo primero que piensas?", term: "Dividendo",
+        options: [ { label: "\"Si la empresa sigue sana, ahora está en oferta.\"", v: "value" }, { label: "\"¿Sigue creciendo? Si es así, el precio de hoy no me preocupa.\"", v: "growth" }, { label: "\"¿Sigue pagando su dividendo? Eso es lo que me importa.\"", v: "dividendos" } ] },
+      { text: "Estás revisando una empresa para invertir. ¿Qué dato miras primero?", term: "Dividendo",
+        options: [ { label: "Si su precio está por debajo de lo que realmente vale.", v: "value" }, { label: "Qué tan rápido crecen sus ventas cada año.", v: "growth" }, { label: "Cuánto paga de dividendo y si lo ha mantenido.", v: "dividendos" } ] },
+      { text: "¿Qué titular te emocionaría más sobre una empresa en la que invertiste?", term: "Dividendo",
+        options: [ { label: "\"Analistas: la acción está barata para lo que vale la empresa.\"", v: "value" }, { label: "\"La empresa duplica sus clientes en un año.\"", v: "growth" }, { label: "\"La empresa aumenta su dividendo por décimo año seguido.\"", v: "dividendos" } ] }
+    ] },
+    { cat: "horizonte", variants: [
+      { text: "¿Cada cuánto te gustaría ver resultados de tu inversión?",
+        options: [ { label: "Cada semana o cada mes.", v: "corto" }, { label: "Cada uno o dos años.", v: "medio" }, { label: "Puedo esperar una década sin problema.", v: "largo" } ] },
+      { text: "¿Qué tan rápido quieres ver crecer tu dinero?",
+        options: [ { label: "Quiero ver resultados en pocos meses.", v: "corto" }, { label: "En uno o dos años está bien.", v: "medio" }, { label: "Sin prisa: me importa cuánto tendré en 10 o 20 años.", v: "largo" } ] },
+      { text: "Si hoy sembraras una semilla de inversión, ¿cuándo quisieras cosechar?",
+        options: [ { label: "Esta misma temporada.", v: "corto" }, { label: "En un par de años.", v: "medio" }, { label: "Cuando sea un árbol grande, aunque tarde una década.", v: "largo" } ] }
+    ] },
+    { cat: "gestion", variants: [
+      { text: "¿Crees que puedes encontrar oportunidades que la mayoría no ve?",
+        options: [ { label: "Sí. Con estudio y esfuerzo puedo lograrlo.", v: "activa" }, { label: "Prefiero ganar lo mismo que el mercado, con menos trabajo y menos comisiones.", v: "pasiva" } ] },
+      { text: "Un amigo te cuenta que este año le ganó al mercado eligiendo acciones. ¿Qué piensas?",
+        options: [ { label: "Quiero aprender a hacer lo mismo.", v: "activa" }, { label: "Puede pasar un año, pero casi nadie lo logra siempre. Prefiero seguir al mercado.", v: "pasiva" } ] },
+      { text: "¿Qué te da más tranquilidad?",
+        options: [ { label: "Saber exactamente en qué empresas estoy y por qué las elegí.", v: "activa" }, { label: "Saber que estoy en cientos de empresas sin tener que vigilarlas.", v: "pasiva" } ] }
+    ] }
   ];
+
+  // Arma un intento: una versión por posición (distinta a la del intento anterior si se puede)
+  // y respuestas en orden aleatorio. Las de horizonte conservan su orden (corto → largo) porque son una escala,
+  // y las opciones mixtas ("activa+pasiva") quedan al final.
+  const shuffle = (arr) => { const a = [...arr]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
+  function newRound(prev) {
+    return SLOTS.map((slot, i) => {
+      let pool = slot.variants.map((_, k) => k);
+      if (prev && pool.length > 1) pool = pool.filter(k => k !== prev[i]?.v);
+      const v = pool[Math.floor(Math.random() * pool.length)];
+      const opts = slot.variants[v].options.map((_, k) => k);
+      const mixed = opts.filter(k => slot.variants[v].options[k].v.includes("+"));
+      const single = opts.filter(k => !mixed.includes(k));
+      return { v, order: [...(slot.cat === "horizonte" ? single : shuffle(single)), ...mixed] };
+    });
+  }
+  function questionsFor(round) {
+    return round.map((r, i) => {
+      const base = SLOTS[i].variants[r.v];
+      return { cat: SLOTS[i].cat, ...base, options: r.order.map(k => base.options[k]) };
+    });
+  }
+  let QUESTIONS = [];
 
   const GLOSSARY = [
     ["Acción", "Una pequeña parte de una empresa. Si compras una acción, eres dueño de un pedacito de ese negocio."],
@@ -446,20 +557,28 @@
   ];
 
   const KEYS = ["A", "B", "C", "D"];
-  const TOTAL = QUESTIONS.length;
+  const TOTAL = SLOTS.length;
   const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   const ICON_ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
-
-  // ---------- Estado ----------
-  const fresh = () => ({ screen: "intro", index: 0, answers: new Array(TOTAL).fill(null) });
-  let state = fresh();
-  let sim = null; // valores del simulador (se inicializan con el horizonte del resultado)
-  let busy = false;
 
   const store = {
     get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch { return d; } },
     set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
   };
+
+  // ---------- Estado ----------
+  // Cada intento recuerda las versiones usadas, para que el siguiente (incluso otro día) sea distinto.
+  function fresh(current) {
+    const saved = store.get("i101-round", null);
+    const prev = current || (Array.isArray(saved) && saved.length === TOTAL ? saved : null);
+    const round = newRound(prev);
+    store.set("i101-round", round);
+    QUESTIONS = questionsFor(round);
+    return { screen: "intro", index: 0, answers: new Array(TOTAL).fill(null), round };
+  }
+  let state = fresh();
+  let sim = null; // valores del simulador (se inicializan con el horizonte del resultado)
+  let busy = false;
   let checks = store.get("i101-checks", new Array(CHECKS.length).fill(false));
   if (!Array.isArray(checks) || checks.length !== CHECKS.length) checks = new Array(CHECKS.length).fill(false);
 
@@ -528,7 +647,7 @@
         <div class="intro">
           <span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>Herramienta para miembros</span>
           <h1>¿Qué tipo de <span class="hl">inversor</span> eres?</h1>
-          <p class="lede">Responde ${TOTAL} situaciones del día a día, sin tecnicismos. Al final verás tu estilo, qué significa y por dónde empezar a estudiar.</p>
+          <p class="lede">Responde ${TOTAL} situaciones del día a día, sin tecnicismos. Al final verás tu estilo, qué significa y por dónde empezar a estudiar. Las situaciones cambian cada vez que haces el test.</p>
           <div class="measures">
             <div class="measure"><b>Filosofía</b><span>Value, Growth o Dividendos</span></div>
             <div class="measure"><b>Horizonte</b><span>Corto, medio o largo plazo</span></div>
@@ -765,7 +884,7 @@
   function begin() { if (busy) return; busy = true; state.screen = "quiz"; render(); }
   function restart() {
     busy = true;
-    state = fresh(); state.screen = "quiz"; sim = null;
+    state = fresh(state.round); state.screen = "quiz"; sim = null;
     closeGloss();
     render({ scroll: true });
   }
@@ -836,7 +955,7 @@
   // Conserva el progreso si la página se actualiza dentro del visor.
   window.claude?.hot?.snapshot?.(() => ({ state, sim }));
   const start = (data) => {
-    if (data && data.state && Array.isArray(data.state.answers) && data.state.answers.length === TOTAL) { state = data.state; sim = data.sim || null; }
+    if (data && data.state && Array.isArray(data.state.round) && data.state.round.length === TOTAL) { state = data.state; sim = data.sim || null; QUESTIONS = questionsFor(state.round); }
     stage.innerHTML = view();
     setProgress();
     if (state.screen === "results") afterResults();
