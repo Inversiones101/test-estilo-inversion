@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<!-- Imagen de vista previa (1200x630). Se renderiza a public/og.png con: sh og/render.sh -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@800;900&family=Inter:wght@500;600;700&display=block">
+<style>
+  :root { --forest: #03302A; --forest-2: #0A3F35; --lime: #A2E21A; --lime-ink: #062A1F; --paper: #F2F3EE; --muted: #A7BBB3; --line: rgba(162,226,26,.30); }
+  * { box-sizing: border-box; margin: 0; }
+  html, body { width: 1200px; height: 630px; overflow: hidden; }
+  body { background: var(--forest); color: var(--paper); font-family: "Inter", Arial, sans-serif; position: relative; }
+  .ring { position: absolute; border-radius: 50%; border: 2px solid var(--line); }
+  .r1 { width: 760px; height: 760px; right: -300px; top: -60px; }
+  .r2 { width: 440px; height: 440px; right: -140px; top: 100px; }
+  .wrap { position: absolute; inset: 64px 72px; display: flex; flex-direction: column; }
+  .brand { display: flex; align-items: center; gap: 16px; }
+  .badge { position: relative; width: 60px; height: 60px; border-radius: 16px; background: var(--forest-2); display: grid; place-items: center; font: 800 22px/1 "Inter Tight", Arial; letter-spacing: -.5px; }
+  .badge::after { content: ""; position: absolute; top: -6px; right: -6px; width: 20px; height: 20px; border-radius: 50%; background: var(--lime); }
+  .brand b { font: 800 30px/1 "Inter Tight", Arial; letter-spacing: -.8px; }
+  .tag { margin-top: 54px; align-self: flex-start; background: var(--lime); color: var(--lime-ink); font: 700 24px/1 "Inter", Arial; padding: 12px 22px; border-radius: 999px; }
+  h1 { margin-top: 26px; font: 900 104px/.98 "Inter Tight", Arial; letter-spacing: -5px; max-width: 900px; }
+  h1 span { color: var(--lime); }
+  .foot { margin-top: auto; display: flex; justify-content: space-between; align-items: center; }
+  .meta { display: flex; gap: 12px; }
+  .meta span { font: 600 24px/1 "Inter", Arial; color: var(--paper); padding: 12px 18px; border-radius: 999px; border: 2px solid rgba(242,243,238,.22); }
+  .go { width: 76px; height: 76px; border-radius: 50%; background: var(--lime); display: grid; place-items: center; }
+  .go svg { width: 34px; height: 34px; }
+</style>
+</head>
+<body>
+  <div class="ring r1"></div><div class="ring r2"></div>
+  <div class="wrap">
+    <div class="brand"><span class="badge">101</span><b>Inversiones 101</b></div>
+    <span class="tag">Test gratuito para miembros</span>
+    <h1>¿Qué tipo de <span>inversor</span> eres?</h1>
+    <div class="foot">
+      <div class="meta"><span>12 preguntas</span><span>3 minutos</span><span>Value · Growth · Dividendos</span></div>
+      <span class="go"><svg viewBox="0 0 24 24" fill="none" stroke="#062A1F" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+    </div>
+  </div>
+</body>
+</html>

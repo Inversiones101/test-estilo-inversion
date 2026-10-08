@@ -1,0 +1,846 @@
+<title>Descubre tu Estilo de Inversión</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@700;800;900&family=Inter:wght@400;500;600;700&display=swap">
+<style>
+  /* Layout (identidad Inversiones 101): banda verde bosque arriba con progreso, panel oscuro para el test (como portadas de carrusel),
+     resultados sobre papel claro (como láminas de contenido), cierre oscuro con CTA a Skool. */
+  :root {
+    --forest: #03302A;
+    --forest-2: #0A3F35;
+    --forest-line: rgba(162, 226, 26, .28);
+    --on-forest: #F2F3EE;
+    --on-forest-muted: #A7BBB3;
+    --lime: #A2E21A;
+    --lime-ink: #062A1F;
+    --paper: #F2F3EE;
+    --card: #FBFBF8;
+    --ink: #10201B;
+    --muted: #5B6863;
+    --line: #DDE1DA;
+    --green: #1F7A34;
+    --green-soft: #E4F0DF;
+    --track: #E9ECE5;
+    --bar-other: #A9D57F;
+    --bar-win-end: #7CC21E;
+    --bar-blend-end: #F2B33D;
+    --amber: #C47A06;
+    --amber-soft: #FBEFD6;
+    --red: #E5674F;
+    --font-display: "Inter Tight", "Inter", "Helvetica Neue", Arial, sans-serif;
+    --font-body: "Inter", "Helvetica Neue", Arial, system-ui, sans-serif;
+    --radius: 22px;
+    --ease: cubic-bezier(.2,.7,.2,1);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --forest: #04372F; --forest-2: #0C4639;
+      --paper: #071915; --card: #0E241F; --ink: #E8EEEA; --muted: #98ABA4; --line: #1F3A33;
+      --green: #8FD63C; --green-soft: #14321F; --amber: #F0B04A; --amber-soft: #33260E;
+      --track: #17302A; --bar-other: #3F6E2C; --bar-win-end: #C4F05A; --bar-blend-end: #F7CB72;
+      color-scheme: dark;
+    }
+  }
+  :root[data-theme="dark"] {
+    --forest: #04372F; --forest-2: #0C4639;
+    --paper: #071915; --card: #0E241F; --ink: #E8EEEA; --muted: #98ABA4; --line: #1F3A33;
+    --green: #8FD63C; --green-soft: #14321F; --amber: #F0B04A; --amber-soft: #33260E;
+      --track: #17302A; --bar-other: #3F6E2C; --bar-win-end: #C4F05A; --bar-blend-end: #F7CB72;
+    color-scheme: dark;
+  }
+
+  * { box-sizing: border-box; }
+  [hidden] { display: none !important; }
+  body { background: var(--paper); color: var(--ink); font-family: var(--font-body); font-size: 16.5px; line-height: 1.55; margin: 0; }
+  .wrap { max-width: 820px; margin: 0 auto; padding-inline: 16px; }
+  h1, h2, h3 { font-family: var(--font-display); font-weight: 800; letter-spacing: -.035em; line-height: 1.05; margin: 0; text-wrap: balance; }
+  a { color: inherit; }
+  .hl { color: var(--lime); }
+  .hl-green { color: var(--green); }
+
+  /* ---------- Cabecera ---------- */
+  header.top {
+    position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20;
+    background: var(--forest); color: var(--on-forest);
+    padding-block: 12px 14px; border-bottom: 1px solid var(--forest-line);
+  }
+  .top-row { display: flex; align-items: center; justify-content: space-between; gap: 10px; flex-wrap: wrap; }
+  .brand { display: flex; align-items: center; gap: 10px; text-decoration: none; }
+  .badge {
+    position: relative; width: 38px; height: 38px; border-radius: 10px; background: var(--forest-2);
+    display: grid; place-items: center; font: 800 .82rem/1 var(--font-display); color: var(--on-forest); letter-spacing: -.02em;
+  }
+  .badge::after { content: ""; position: absolute; top: -4px; right: -4px; width: 12px; height: 12px; border-radius: 50%; background: var(--lime); }
+  .brand-name { font: 800 1.05rem/1.1 var(--font-display); letter-spacing: -.02em; }
+  .brand-name small { display: block; font: 500 .72rem/1.2 var(--font-body); color: var(--on-forest-muted); letter-spacing: 0; }
+  .top-actions { display: flex; gap: 8px; }
+  .btn {
+    font: 600 .9rem/1 var(--font-body); border-radius: 999px; padding: 10px 16px; cursor: pointer;
+    display: inline-flex; align-items: center; gap: 8px; text-decoration: none; border: 1.5px solid transparent;
+    transition: transform .15s var(--ease), background .15s, border-color .15s;
+  }
+  .btn svg { width: 16px; height: 16px; flex: none; }
+  .btn:hover { transform: translateY(-1px); }
+  .btn:focus-visible, .opt:focus-visible, .chk:focus-within, .term-btn:focus-visible { outline: 3px solid var(--lime); outline-offset: 2px; }
+  .btn-ghost-dark { color: var(--on-forest); background: transparent; border-color: rgba(242,243,238,.25); }
+  .btn-ghost-dark:hover { border-color: var(--lime); }
+  .btn-lime { background: var(--lime); color: var(--lime-ink); }
+  .btn-line { background: var(--card); color: var(--ink); border-color: var(--line); }
+  .btn-line:hover { border-color: var(--green); }
+  .btn[disabled] { opacity: .35; cursor: default; transform: none; }
+
+  .progress-meta { display: flex; justify-content: space-between; margin-top: 12px; font: 600 .78rem/1 var(--font-body); color: var(--on-forest-muted); font-variant-numeric: tabular-nums; letter-spacing: .02em; }
+  .progress { height: 8px; border-radius: 99px; background: rgba(242,243,238,.12); overflow: hidden; margin-top: 8px; }
+  .progress-fill { height: 100%; width: 0%; background: var(--lime); border-radius: 99px; transition: width .45s var(--ease); }
+
+  /* ---------- Panel del test (oscuro) ---------- */
+  .stage { padding-block: 24px 8px; }
+  .panel {
+    position: relative; overflow: hidden; isolation: isolate;
+    background: var(--forest); color: var(--on-forest); border-radius: var(--radius);
+    padding: clamp(24px, 5vw, 44px);
+  }
+  .panel::before, .panel::after {
+    content: ""; position: absolute; z-index: -1; border-radius: 50%; border: 1.5px solid var(--forest-line); pointer-events: none;
+  }
+  .panel::before { width: 520px; height: 520px; right: -260px; top: 40px; }
+  .panel::after { width: 300px; height: 300px; right: -150px; top: 150px; }
+  .card { transition: opacity .28s var(--ease), transform .28s var(--ease); }
+  .card.leaving { opacity: 0; transform: translateX(-28px); }
+  .card.entering { opacity: 0; transform: translateX(28px); }
+  .tag {
+    display: inline-flex; align-items: center; gap: 8px; background: var(--lime); color: var(--lime-ink);
+    font: 700 .82rem/1 var(--font-body); padding: 8px 14px; border-radius: 999px;
+  }
+  .tag svg { width: 14px; height: 14px; }
+  .q-count { float: right; font: 600 .9rem/1 var(--font-body); color: var(--on-forest-muted); font-variant-numeric: tabular-nums; letter-spacing: .04em; margin-top: 6px; }
+  .q-title { font-size: clamp(1.7rem, 5vw, 2.6rem); margin-top: 22px; max-width: 20ch; }
+  .q-hint { color: var(--on-forest-muted); margin: 12px 0 0; max-width: 58ch; }
+  .opts { display: grid; gap: 12px; margin-top: 28px; }
+  .opt {
+    display: grid; grid-template-columns: 36px 1fr; gap: 14px; align-items: center; text-align: left; width: 100%;
+    background: var(--forest-2); color: var(--on-forest); border: 1.5px solid rgba(242,243,238,.12); border-radius: 16px;
+    padding: 15px 18px; cursor: pointer; font: 500 1.02rem/1.45 var(--font-body);
+    transition: border-color .15s, transform .15s var(--ease), background .15s;
+  }
+  .opt:hover { border-color: var(--lime); transform: translateY(-1px); }
+  .opt .key { width: 36px; height: 36px; border-radius: 50%; display: grid; place-items: center; font: 800 .9rem/1 var(--font-display); color: var(--on-forest); border: 1.5px solid rgba(242,243,238,.3); }
+  .opt.selected { border-color: var(--lime); background: rgba(162,226,26,.12); }
+  .opt.selected .key { background: var(--lime); color: var(--lime-ink); border-color: var(--lime); }
+  .q-nav { margin-top: 24px; display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; color: var(--on-forest-muted); font-size: .88rem; }
+
+  /* Intro */
+  .intro h1 { font-size: clamp(2.2rem, 7vw, 3.6rem); margin-top: 22px; max-width: 14ch; }
+  .intro .lede { color: var(--on-forest-muted); font-size: 1.1rem; margin: 16px 0 0; max-width: 52ch; }
+  .measures { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; margin-top: 28px; }
+  .measure { background: var(--forest-2); border-radius: 16px; padding: 16px; }
+  .measure b { display: block; font: 800 1rem/1.2 var(--font-display); letter-spacing: -.01em; }
+  .measure span { color: var(--on-forest-muted); font-size: .88rem; }
+  .intro-cta { display: flex; align-items: center; gap: 14px; margin-top: 30px; flex-wrap: wrap; }
+  .go { font: 800 1.05rem/1 var(--font-display); padding: 0 8px 0 22px; height: 56px; gap: 14px; }
+  .go .arrow { width: 42px; height: 42px; border-radius: 50%; background: var(--lime-ink); color: var(--lime); display: grid; place-items: center; }
+  .go .arrow svg { width: 18px; height: 18px; }
+  .intro-cta small { color: var(--on-forest-muted); }
+
+  /* ---------- Resultados (papel) ---------- */
+  .res-hero h2 { font-size: clamp(1.9rem, 6vw, 3rem); margin-top: 20px; }
+  .res-hero p { color: var(--on-forest-muted); margin: 14px 0 0; max-width: 58ch; }
+  .pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+  .pill { font: 700 .92rem/1 var(--font-body); padding: 9px 14px; border-radius: 999px; background: var(--forest-2); border: 1.5px solid rgba(242,243,238,.18); }
+  .pill.win { border-color: var(--lime); color: var(--lime); }
+  .pill.blend { border-color: #F0B04A; color: #F0B04A; }
+  .res-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 24px; }
+  .copied { color: var(--lime); font-size: .88rem; align-self: center; }
+
+  .section-title { font-size: clamp(1.5rem, 4.5vw, 2rem); margin-top: 44px; }
+  .section-sub { color: var(--muted); margin: 8px 0 0; max-width: 60ch; }
+  .results { display: grid; gap: 16px; margin-top: 20px; }
+  .rcard { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(18px, 4vw, 28px); display: grid; gap: 14px; min-width: 0; }
+  .rcard-top { display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
+  .eyebrow { font: 700 .76rem/1 var(--font-body); text-transform: uppercase; letter-spacing: .1em; color: var(--muted); margin: 0; }
+  .chip { font: 700 .74rem/1 var(--font-body); padding: 6px 10px; border-radius: 999px; background: var(--green-soft); color: var(--green); }
+  .chip.blend { background: var(--amber-soft); color: var(--amber); }
+  .rcard h3 { font-size: 1.6rem; }
+  .rcard p { margin: 0; max-width: 64ch; }
+  .clarity { font-size: .88rem; color: var(--muted); }
+  .clarity b { color: var(--ink); }
+  .bars { display: grid; gap: 10px; }
+  .bar-row { display: grid; grid-template-columns: minmax(96px, 130px) 1fr 3.2em; gap: 12px; align-items: center; font-size: .94rem; }
+  .bar-track { height: 14px; background: var(--track); border-radius: 99px; overflow: hidden; }
+  .bar-fill { display: block; height: 100%; background: var(--bar-other); border-radius: 99px; width: 0; transition: width .8s var(--ease); }
+  .bar-row.win .bar-fill { background: linear-gradient(90deg, var(--green), var(--bar-win-end)); }
+  .rcard.is-blend .bar-row.win .bar-fill { background: linear-gradient(90deg, var(--amber), var(--bar-blend-end)); }
+  .bar-row:not(.win) .bar-pct { color: var(--muted); }
+  .bar-row.win .bar-label { font-weight: 700; }
+  .bar-pct { font-weight: 700; text-align: right; font-variant-numeric: tabular-nums; }
+  .study { display: grid; gap: 8px; border-top: 1px dashed var(--line); padding-top: 14px; }
+  .study-list { display: flex; flex-wrap: wrap; gap: 6px; }
+  .study-list span { font-size: .86rem; padding: 6px 10px; border-radius: 8px; background: var(--paper); border: 1px solid var(--line); }
+  .tip { color: var(--muted); font-size: .95rem; }
+  .tip b { color: var(--ink); }
+
+  /* Simulador */
+  .tool { background: var(--card); border: 1px solid var(--line); border-radius: var(--radius); padding: clamp(18px, 4vw, 28px); margin-top: 20px; display: grid; gap: 20px; }
+  .fields { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 12px; }
+  .field { display: grid; gap: 6px; min-width: 0; }
+  .field label { font: 600 .82rem/1.2 var(--font-body); color: var(--muted); }
+  .field input, .field select {
+    width: 100%; font: 600 1rem/1 var(--font-body); color: var(--ink); background: var(--paper);
+    border: 1.5px solid var(--line); border-radius: 12px; padding: 12px; font-variant-numeric: tabular-nums;
+  }
+  .field input:focus, .field select:focus { outline: none; border-color: var(--green); }
+  .sim-out { display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 12px; }
+  .stat { background: var(--paper); border-radius: 14px; padding: 14px; min-width: 0; }
+  .stat span { display: block; font-size: .8rem; color: var(--muted); font-weight: 600; }
+  .stat b { display: block; font: 800 clamp(1.15rem, 3.6vw, 1.6rem)/1.15 var(--font-display); letter-spacing: -.02em; margin-top: 6px; font-variant-numeric: tabular-nums; overflow-wrap: anywhere; }
+  .stat.total { background: var(--forest); color: var(--on-forest); }
+  .stat.total span { color: var(--on-forest-muted); }
+  .stat.total b { color: var(--lime); }
+  .stack { display: flex; height: 18px; border-radius: 99px; overflow: hidden; background: var(--line); }
+  .stack .s-cont { background: var(--forest); transition: width .5s var(--ease); }
+  .stack .s-gain { background: var(--lime); transition: width .5s var(--ease); }
+  .legend { display: flex; gap: 16px; flex-wrap: wrap; font-size: .85rem; color: var(--muted); margin-top: 8px; }
+  .legend i { display: inline-block; width: 10px; height: 10px; border-radius: 3px; margin-right: 6px; vertical-align: -1px; }
+  .fineprint { font-size: .8rem; color: var(--muted); margin: 0; }
+
+  /* Checklist */
+  .checks { display: grid; gap: 8px; }
+  .chk { display: grid; grid-template-columns: 24px 1fr; gap: 12px; align-items: start; padding: 12px 14px; border-radius: 14px; background: var(--paper); cursor: pointer; }
+  .chk input { width: 20px; height: 20px; margin: 2px 0 0; accent-color: var(--green); }
+  .chk-score { display: flex; align-items: center; gap: 12px; flex-wrap: wrap; font-weight: 600; }
+  .chk-score .stack { flex: 1 1 160px; height: 10px; }
+
+  /* Comunidad / pie */
+  .community { margin-top: 44px; }
+  .community h2 { font-size: clamp(1.7rem, 5vw, 2.4rem); max-width: 18ch; }
+  .community p { color: var(--on-forest-muted); margin: 12px 0 0; max-width: 54ch; }
+  .skool-btn { background: #FFFFFF; color: #1C1C1C; height: 54px; padding: 0 20px; font: 700 1rem/1 var(--font-body); margin-top: 22px; }
+  .skool-word { font: 800 1.35rem/1 "Lato", var(--font-body); letter-spacing: -.02em; }
+  .skool-word .s1 { color: #262F94; } .skool-word .s2 { color: #DB5340; } .skool-word .s3 { color: #E2B463; }
+  .skool-word .s4 { color: #6CB9EF; } .skool-word .s5 { color: #C85A49; }
+  footer { padding-block: 36px 56px; display: grid; gap: 14px; }
+  .note { padding: 16px 18px; border-left: 4px solid var(--lime); background: var(--card); border-radius: 0 14px 14px 0; font-size: .95rem; max-width: 72ch; }
+  .note strong { color: var(--green); }
+  .disclaimer { color: var(--muted); font-size: .84rem; max-width: 72ch; margin: 0; }
+  .disclaimer b { color: var(--ink); }
+  .foot-row { display: flex; justify-content: space-between; align-items: center; gap: 12px; flex-wrap: wrap; color: var(--muted); font-size: .84rem; border-top: 1px solid var(--line); padding-top: 16px; }
+  .foot-row a { font-weight: 700; color: var(--green); text-decoration: none; }
+
+  /* Glosario */
+  .overlay { position: fixed; inset: 0; z-index: 50; background: rgba(2, 20, 16, .55); display: flex; justify-content: flex-end; }
+  .drawer { width: min(440px, 100%); height: 100%; background: var(--card); color: var(--ink); overflow-y: auto; padding: calc(20px + env(safe-area-inset-top, 0px)) 20px calc(28px + env(safe-area-inset-bottom, 0px)); display: grid; align-content: start; gap: 14px; animation: slidein .3s var(--ease); }
+  @keyframes slidein { from { transform: translateX(40px); opacity: 0; } }
+  .drawer-head { display: flex; justify-content: space-between; align-items: center; gap: 10px; }
+  .drawer-head h2 { font-size: 1.7rem; }
+  .gloss-search { width: 100%; font: 500 1rem/1 var(--font-body); color: var(--ink); background: var(--paper); border: 1.5px solid var(--line); border-radius: 12px; padding: 12px; }
+  .term { border-bottom: 1px solid var(--line); padding-bottom: 12px; }
+  .term b { font: 800 1.05rem/1.3 var(--font-display); letter-spacing: -.01em; }
+  .term p { margin: 4px 0 0; color: var(--muted); font-size: .94rem; }
+  .term.flash { background: var(--green-soft); border-radius: 10px; padding: 10px; }
+  .term-btn { background: none; border: 0; padding: 0; font: inherit; color: var(--green); font-weight: 700; text-decoration: underline; text-underline-offset: 3px; cursor: pointer; }
+
+  @media (max-width: 600px) {
+    .measures, .sim-out { grid-template-columns: 1fr; }
+    .bar-row { grid-template-columns: 96px 1fr 3em; }
+    .brand-name small { display: none; }
+    .top-actions .btn { padding: 9px 12px; }
+    .btn .lbl-long { display: none; }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after { transition: none !important; animation: none !important; }
+  }
+</style>
+
+<header class="top">
+  <div class="wrap">
+    <div class="top-row">
+      <a class="brand" href="https://www.skool.com/inversiones101" target="_blank" rel="noopener">
+        <span class="badge" aria-hidden="true">101</span>
+        <span class="brand-name">Inversiones 101<small>por Ricardo Araque</small></span>
+      </a>
+      <div class="top-actions">
+        <button class="btn btn-ghost-dark" id="open-gloss" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20V3H6.5A2.5 2.5 0 0 0 4 5.5z"/><path d="M4 19.5A2.5 2.5 0 0 0 6.5 22H20v-5"/></svg>
+          Glosario
+        </button>
+        <button class="btn btn-ghost-dark" id="restart" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 12a9 9 0 1 0 3-6.7L3 8"/><path d="M3 3v5h5"/></svg>
+          Reiniciar<span class="lbl-long">&nbsp;test</span>
+        </button>
+      </div>
+    </div>
+    <div class="progress-meta"><span id="p-label">12 preguntas · 3 minutos</span><span id="p-pct">0%</span></div>
+    <div class="progress" role="progressbar" aria-label="Progreso del test" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0" id="p-bar">
+      <div class="progress-fill" id="p-fill"></div>
+    </div>
+  </div>
+</header>
+
+<main class="wrap">
+  <section class="stage" id="stage" aria-live="polite"></section>
+</main>
+
+<div class="wrap">
+  <footer>
+    <aside class="note">
+      <strong>Recuerda:</strong> tu estilo de inversión no es algo permanente y puede cambiar según tu edad, tus metas y tu experiencia. Repite este test cada cierto tiempo y observa cómo evolucionas.
+    </aside>
+    <p class="disclaimer">
+      <b>Herramienta interactiva desarrollada con IA por Inversiones 101.</b> Se construyó con abundante información y criterios de educación financiera para darte resultados lo más precisos posible. Aun así, ningún test conoce tu situación completa: siempre es recomendable juzgar los resultados con tu propio criterio. Contenido educativo; no es asesoría financiera personalizada. Rendimientos pasados no garantizan resultados futuros.
+    </p>
+    <div class="foot-row">
+      <span>© Inversiones 101 · @ricardoaraquen</span>
+      <a href="https://www.skool.com/inversiones101" target="_blank" rel="noopener">Ir a la comunidad en Skool →</a>
+    </div>
+  </footer>
+</div>
+
+<div class="overlay" id="gloss" hidden>
+  <div class="drawer" role="dialog" aria-modal="true" aria-labelledby="gloss-title">
+    <div class="drawer-head">
+      <h2 id="gloss-title">Glosario <span class="hl-green">101</span></h2>
+      <button class="btn btn-line" id="close-gloss" type="button" aria-label="Cerrar glosario">Cerrar</button>
+    </div>
+    <input class="gloss-search" id="gloss-search" type="search" placeholder="Busca un término…" aria-label="Buscar en el glosario">
+    <div id="gloss-list"></div>
+  </div>
+</div>
+
+<script>
+(() => {
+  const SKOOL_URL = "https://www.skool.com/inversiones101";
+
+  // ---------- Modelo: categorías y estilos ----------
+  const CATS = {
+    filosofia: {
+      name: "Filosofía de inversión",
+      order: ["value", "growth", "dividendos"],
+      styles: {
+        value: { label: "Value", title: "Inversor Value",
+          desc: "Buscas buenas empresas que hoy se venden más baratas de lo que realmente valen. Tienes paciencia y te gusta comprar \"en oferta\".",
+          tip: "Aprende a leer los números básicos de una empresa (ganancias, deudas) y a comparar su precio con lo que vale.",
+          study: ["Berkshire Hathaway (BRK.B)", "ETF VTV (empresas value)", "Concepto: margen de seguridad"] },
+        growth: { label: "Growth", title: "Inversor Growth",
+          desc: "Te atraen las empresas que crecen rápido y están construyendo el futuro. Aceptas pagar más hoy por el potencial de mañana.",
+          tip: "Estas acciones suben y bajan con fuerza. Prepárate para ver caídas grandes sin vender por miedo.",
+          study: ["ETF QQQ (Nasdaq-100)", "ETF VUG (empresas growth)", "Concepto: crecimiento de ingresos"] },
+        dividendos: { label: "Dividendos", title: "Inversor de Dividendos",
+          desc: "Quieres que tu dinero te pague un \"sueldo\". Prefieres empresas estables que reparten parte de sus ganancias con regularidad.",
+          tip: "Fíjate en que la empresa pueda seguir pagando ese dividendo, no solo en que hoy sea alto.",
+          study: ["ETF SCHD", "ETF VIG (dividendos crecientes)", "Concepto: reinvertir dividendos"] }
+      },
+      blends: {
+        "growth+value": { title: "Híbrido Value + Growth", desc: "Te gusta el crecimiento, pero no a cualquier precio. Buscas empresas que crecen y que todavía no están caras. A esto se le suele llamar GARP: crecimiento a precio razonable." },
+        "dividendos+value": { title: "Híbrido Value + Dividendos", desc: "Buscas empresas sólidas, a buen precio y que además te paguen mientras esperas. Un enfoque prudente y paciente." },
+        "dividendos+growth": { title: "Híbrido Growth + Dividendos", desc: "Quieres empresas que crezcan y que también aumenten sus dividendos año tras año. Combinas futuro con ingresos." },
+        "dividendos+growth+value": { title: "Blend total", desc: "Te identificas con las tres filosofías por igual. Una cartera equilibrada que combine las tres puede ser tu punto de partida." }
+      }
+    },
+    horizonte: {
+      name: "Horizonte temporal",
+      order: ["corto", "medio", "largo"],
+      years: { corto: 1, medio: 5, largo: 20 },
+      styles: {
+        corto: { label: "Corto plazo", title: "Corto plazo",
+          desc: "Piensas en meses, hasta 1 año. Necesitas que tu dinero esté disponible pronto, así que la seguridad pesa más que el rendimiento.",
+          tip: "Para dinero que usarás pronto, las acciones son arriesgadas. Considera instrumentos estables y de bajo riesgo.",
+          study: ["Cuenta de ahorro", "Depósito a plazo fijo", "Concepto: liquidez"] },
+        medio: { label: "Medio plazo", title: "Medio plazo",
+          desc: "Piensas en 1 a 5 años, con metas concretas como una casa, un auto o estudios. Buscas crecer, pero sin sustos que arruinen la meta.",
+          tip: "Mezclar inversiones de crecimiento con otras más estables te ayuda a llegar a la meta con menos sobresaltos.",
+          study: ["ETF de bonos BND", "Mezcla acciones + bonos", "Concepto: diversificar"] },
+        largo: { label: "Largo plazo", title: "Largo plazo",
+          desc: "Piensas en 5, 10 o más años. Entiendes que el tiempo es tu mejor aliado y que las caídas de corto plazo son parte del camino.",
+          tip: "El interés compuesto trabaja mejor cuanto más tiempo le das. Lo más difícil será no tocar tu inversión.",
+          study: ["ETF VOO (S&P 500)", "Aportes mensuales automáticos", "Concepto: interés compuesto"] }
+      },
+      blends: {
+        "corto+medio": { title: "Híbrido Corto + Medio plazo", desc: "Tienes metas cercanas y otras a pocos años. Separar tu dinero por objetivo (un \"cajón\" para cada meta) te dará claridad." },
+        "largo+medio": { title: "Híbrido Medio + Largo plazo", desc: "Combinas metas de pocos años con un plan de largo aliento. Tienes paciencia, pero también objetivos concretos en el camino." },
+        "corto+largo": { title: "Híbrido Corto + Largo plazo", desc: "Tienes necesidades inmediatas y, a la vez, una visión de muy largo plazo. Clave: no mezcles el dinero de ambas metas." },
+        "corto+largo+medio": { title: "Blend total", desc: "Tus metas abarcan todos los plazos. Organiza tu dinero en partes según cuándo lo vas a necesitar." }
+      }
+    },
+    gestion: {
+      name: "Tipo de gestión",
+      order: ["activa", "pasiva"],
+      styles: {
+        activa: { label: "Activa", title: "Gestión Activa",
+          desc: "Te gusta investigar, elegir tus propias empresas y tomar decisiones. Disfrutas el proceso y quieres intentar superar al mercado.",
+          tip: "Lleva un registro de tus decisiones y compáralas con un fondo indexado: así sabrás si tu esfuerzo realmente suma.",
+          study: ["Diario de inversión", "Empresas que usas a diario", "Concepto: análisis fundamental"] },
+        pasiva: { label: "Pasiva", title: "Gestión Pasiva",
+          desc: "Prefieres una estrategia simple: comprar \"un poquito de todo\" mediante fondos que siguen al mercado y dejar que el tiempo haga su trabajo.",
+          tip: "Aportar una cantidad fija cada mes, sin importar si el mercado sube o baja, es una estrategia muy poderosa y sencilla.",
+          study: ["ETF VOO (S&P 500)", "ETF VT (todo el mundo)", "Concepto: costo promedio (DCA)"] }
+      },
+      blends: {
+        "activa+pasiva": { title: "Híbrido Núcleo + Satélite", desc: "Quieres lo mejor de ambos mundos: una base pasiva (el núcleo) con fondos indexados y una parte pequeña (el satélite) donde eliges tus propias empresas." }
+      }
+    }
+  };
+
+  // ---------- Preguntas (intercaladas por categoría) ----------
+  const QUESTIONS = [
+    { cat: "horizonte", text: "Si hoy inviertes un dinero, ¿para cuándo crees que lo vas a necesitar?",
+      options: [ { label: "En menos de 1 año.", v: "corto" }, { label: "Entre 1 y 5 años.", v: "medio" }, { label: "En más de 5 años, o no tengo pensado usarlo pronto.", v: "largo" } ] },
+    { cat: "filosofia", text: "Vas a comprar un auto usado. ¿Cuál eliges?",
+      options: [
+        { label: "Uno de buena marca con un pequeño golpe, a un precio muy por debajo de lo que vale.", v: "value" },
+        { label: "El modelo más nuevo, con la tecnología que todos van a querer, aunque cueste más.", v: "growth" },
+        { label: "Uno sencillo que puedas rentar los fines de semana para que te genere dinero extra.", v: "dividendos" } ] },
+    { cat: "gestion", text: "Tienes un sábado libre. ¿Qué prefieres hacer con tus inversiones?",
+      options: [ { label: "Leer noticias de empresas, revisar números y buscar oportunidades.", v: "activa" }, { label: "Nada. Prefiero que funcionen solas mientras disfruto mi día.", v: "pasiva" } ] },
+    { cat: "filosofia", text: "Te ofrecen ser socio de un negocio. ¿Cuál te convence más?",
+      options: [
+        { label: "Una panadería con 30 años y clientes fieles, que se vende barata porque el dueño se retira.", v: "value" },
+        { label: "Una app nueva que crece muy rápido cada año, aunque todavía no gana dinero.", v: "growth" },
+        { label: "Una lavandería estable que reparte ganancias a sus socios todos los meses.", v: "dividendos" } ] },
+    { cat: "horizonte", text: "¿Cuál de estas metas se parece más a la tuya?",
+      options: [ { label: "Un viaje o una compra que quiero hacer pronto.", v: "corto" }, { label: "Juntar la prima de una casa, un carro o pagar mis estudios.", v: "medio" }, { label: "Mi retiro o lograr libertad financiera algún día.", v: "largo" } ] },
+    { cat: "gestion", text: "¿Qué forma de invertir te suena mejor?", term: "Fondo indexado (ETF)",
+      options: [ { label: "Elegir yo mismo cada empresa en la que pongo mi dinero.", v: "activa" }, { label: "Comprar una \"canasta\" que incluye cientos de empresas a la vez (un fondo indexado).", v: "pasiva" },
+        { label: "Las dos: la mayor parte en una canasta y unas pocas empresas elegidas por mí.", v: "activa+pasiva" } ] },
+    { cat: "filosofia", text: "¿Qué frase te representa más?",
+      options: [ { label: "\"Compra barato lo que vale mucho.\"", v: "value" }, { label: "\"Apuesta por lo que viene.\"", v: "growth" }, { label: "\"Que el dinero trabaje y me pague un sueldo.\"", v: "dividendos" } ] },
+    { cat: "horizonte", text: "Tu inversión baja 15% en una semana. ¿Qué haces?", hint: "No hay respuesta correcta: piensa en lo que harías de verdad.",
+      options: [ { label: "Vendo para no perder más: voy a necesitar ese dinero pronto.", v: "corto" }, { label: "Espero unos meses a ver si se recupera.", v: "medio" }, { label: "No hago nada, o incluso compro más. Faltan muchos años.", v: "largo" } ] },
+    { cat: "gestion", text: "¿Cuánto tiempo a la semana puedes dedicarle a tus inversiones?",
+      options: [ { label: "Varias horas. Me gusta aprender y analizar.", v: "activa" }, { label: "Menos de 30 minutos. Tengo otras prioridades.", v: "pasiva" } ] },
+    { cat: "filosofia", text: "Una acción que te gusta baja 30% en un mes. ¿Qué es lo primero que piensas?", term: "Dividendo",
+      options: [ { label: "\"Si la empresa sigue sana, ahora está en oferta.\"", v: "value" }, { label: "\"¿Sigue creciendo? Si es así, el precio de hoy no me preocupa.\"", v: "growth" }, { label: "\"¿Sigue pagando su dividendo? Eso es lo que me importa.\"", v: "dividendos" } ] },
+    { cat: "horizonte", text: "¿Cada cuánto te gustaría ver resultados de tu inversión?",
+      options: [ { label: "Cada semana o cada mes.", v: "corto" }, { label: "Cada uno o dos años.", v: "medio" }, { label: "Puedo esperar una década sin problema.", v: "largo" } ] },
+    { cat: "gestion", text: "¿Crees que puedes encontrar oportunidades que la mayoría no ve?",
+      options: [ { label: "Sí. Con estudio y esfuerzo puedo lograrlo.", v: "activa" }, { label: "Prefiero ganar lo mismo que el mercado, con menos trabajo y menos comisiones.", v: "pasiva" } ] }
+  ];
+
+  const GLOSSARY = [
+    ["Acción", "Una pequeña parte de una empresa. Si compras una acción, eres dueño de un pedacito de ese negocio."],
+    ["Bolsa de valores", "El mercado donde se compran y venden acciones y otros instrumentos de inversión."],
+    ["Value (valor)", "Estilo que busca empresas que cotizan por debajo de lo que realmente valen, como comprar en oferta."],
+    ["Growth (crecimiento)", "Estilo que busca empresas que aumentan sus ventas y ganancias muy rápido, aunque hoy se vean caras."],
+    ["Dividendo", "Parte de las ganancias que una empresa reparte a sus accionistas, normalmente cada trimestre."],
+    ["Fondo indexado (ETF)", "Una \"canasta\" que compra muchas empresas a la vez para copiar a un índice, como el S&P 500. Se compra como una acción."],
+    ["S&P 500", "Índice que agrupa a 500 de las empresas más grandes de Estados Unidos. Se usa como referencia de \"el mercado\"."],
+    ["Horizonte temporal", "El tiempo que puedes dejar tu dinero invertido antes de necesitarlo."],
+    ["Gestión activa", "Elegir tú mismo en qué invertir y cuándo comprar o vender, intentando superar al mercado."],
+    ["Gestión pasiva", "Invertir en fondos que siguen al mercado completo y mantenerlos a largo plazo, con poco trabajo."],
+    ["Interés compuesto", "Cuando tus ganancias también generan ganancias. Con el tiempo, el crecimiento se acelera."],
+    ["Diversificar", "Repartir tu dinero en muchas inversiones distintas para que una mala no arruine todo."],
+    ["Volatilidad", "Qué tanto sube y baja el precio de una inversión. Más volatilidad significa más sustos en el camino."],
+    ["Inflación", "El aumento general de precios. Si tu dinero crece menos que la inflación, pierde poder de compra."],
+    ["Comisión", "Lo que te cobra un banco, bróker o fondo por invertir. Pequeñas comisiones restan mucho a largo plazo."],
+    ["Bróker", "La plataforma o empresa que te permite comprar y vender acciones y ETFs."],
+    ["Fondo de emergencia", "Dinero guardado (de 3 a 6 meses de gastos) para imprevistos. Se arma antes de invertir."],
+    ["Costo promedio (DCA)", "Invertir la misma cantidad cada mes sin importar el precio. Reduce el riesgo de comprar todo en mal momento."]
+  ];
+
+  const CHECKS = [
+    "Tengo un fondo de emergencia de 3 a 6 meses de gastos.",
+    "No tengo deudas caras, como tarjetas de crédito con interés alto.",
+    "Sé para qué meta estoy invirtiendo y en cuánto tiempo la quiero lograr.",
+    "Entiendo que mi inversión puede bajar temporalmente y no voy a vender por miedo.",
+    "Voy a invertir solo dinero que no necesito en el corto plazo."
+  ];
+
+  const KEYS = ["A", "B", "C", "D"];
+  const TOTAL = QUESTIONS.length;
+  const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  const ICON_ARROW = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg>';
+
+  // ---------- Estado ----------
+  const fresh = () => ({ screen: "intro", index: 0, answers: new Array(TOTAL).fill(null) });
+  let state = fresh();
+  let sim = null; // valores del simulador (se inicializan con el horizonte del resultado)
+  let busy = false;
+
+  const store = {
+    get(k, d) { try { const v = localStorage.getItem(k); return v ? JSON.parse(v) : d; } catch { return d; } },
+    set(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch {} }
+  };
+  let checks = store.get("i101-checks", new Array(CHECKS.length).fill(false));
+  if (!Array.isArray(checks) || checks.length !== CHECKS.length) checks = new Array(CHECKS.length).fill(false);
+
+  const $ = (id) => document.getElementById(id);
+  const stage = $("stage");
+  const esc = (s) => String(s).replace(/[&<>"]/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]));
+
+  // ---------- Lógica de puntuación ----------
+  // Conteo por categoría. Si más de un estilo comparte el máximo, hay empate → perfil Híbrido/Blend.
+  function computeResults(answers) {
+    const out = {};
+    for (const [catKey, cat] of Object.entries(CATS)) {
+      const counts = Object.fromEntries(cat.order.map(k => [k, 0]));
+      // Una respuesta como "activa+pasiva" reparte su punto en partes iguales entre esos estilos.
+      QUESTIONS.forEach((q, i) => {
+        if (q.cat !== catKey || !answers[i]) return;
+        const parts = answers[i].split("+").filter(k => k in counts);
+        parts.forEach(k => { counts[k] += 1 / parts.length; });
+      });
+      const total = Object.values(counts).reduce((a, b) => a + b, 0);
+      const max = Math.max(...Object.values(counts));
+      const winners = total === 0 ? [] : cat.order.filter(k => counts[k] === max);
+      out[catKey] = { counts, total, max, winners, isBlend: winners.length > 1 };
+    }
+    return out;
+  }
+
+  function profileFor(catKey, r) {
+    const cat = CATS[catKey];
+    if (!r.isBlend) {
+      const s = cat.styles[r.winners[0]];
+      return { ...s, short: s.label };
+    }
+    const id = [...r.winners].sort().join("+");
+    const names = r.winners.map(k => cat.styles[k].label);
+    const blend = cat.blends[id] || { title: "Híbrido " + names.join(" + "), desc: "Te identificas por igual con " + names.join(" y ") + ". Combinar ambos enfoques puede funcionar bien para ti." };
+    return {
+      title: blend.title, desc: blend.desc,
+      tip: "Un empate no es un error: significa que tu estilo combina varios enfoques. Lee la descripción de cada uno y quédate con lo que más te sirva hoy.",
+      study: [...new Set(r.winners.flatMap(k => cat.styles[k].study.slice(0, 2)))],
+      short: "Blend " + names.join(" / ")
+    };
+  }
+
+  function clarityOf(r) {
+    const pct = Math.round(r.max / r.total * 100);
+    if (r.isBlend) return { label: "Mixta", text: `empate: ${pct}% de tus respuestas para cada estilo` };
+    return { label: pct >= 75 ? "Alta" : "Media", text: `${pct}% de tus respuestas apuntan a este estilo` };
+  }
+
+  // ---------- Render ----------
+  function setProgress() {
+    const answered = state.answers.filter(Boolean).length;
+    const pct = state.screen === "results" ? 100 : Math.round((answered / TOTAL) * 100);
+    $("p-fill").style.width = pct + "%";
+    $("p-bar").setAttribute("aria-valuenow", pct);
+    $("p-pct").textContent = pct + "%";
+    $("p-label").textContent =
+      state.screen === "intro" ? `${TOTAL} preguntas · 3 minutos` :
+      state.screen === "results" ? "Test completado" : `Pregunta ${state.index + 1} de ${TOTAL}`;
+  }
+
+  function introHTML() {
+    return `
+      <div class="panel card" id="card">
+        <div class="intro">
+          <span class="tag"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M3 17l6-6 4 4 8-8"/><path d="M14 7h7v7"/></svg>Herramienta para miembros</span>
+          <h1>¿Qué tipo de <span class="hl">inversor</span> eres?</h1>
+          <p class="lede">Responde ${TOTAL} situaciones del día a día, sin tecnicismos. Al final verás tu estilo, qué significa y por dónde empezar a estudiar.</p>
+          <div class="measures">
+            <div class="measure"><b>Filosofía</b><span>Value, Growth o Dividendos</span></div>
+            <div class="measure"><b>Horizonte</b><span>Corto, medio o largo plazo</span></div>
+            <div class="measure"><b>Gestión</b><span>Activa o pasiva</span></div>
+          </div>
+          <div class="intro-cta">
+            <button type="button" class="btn btn-lime go" id="start">Empezar el test <span class="arrow">${ICON_ARROW}</span></button>
+            <small>Sin registro. Tus respuestas no se guardan en ningún servidor.</small>
+          </div>
+        </div>
+      </div>`;
+  }
+
+  function questionHTML(i) {
+    const q = QUESTIONS[i];
+    const chosen = state.answers[i];
+    return `
+      <div class="panel card" id="card">
+        <span class="q-count">${String(i + 1).padStart(2, "0")} / ${TOTAL}</span>
+        <span class="tag">${esc(CATS[q.cat].name)}</span>
+        <h1 class="q-title">${esc(q.text)}</h1>
+        ${q.hint ? `<p class="q-hint">${esc(q.hint)}</p>` : ""}
+        <div class="opts" role="group" aria-label="Opciones de respuesta">
+          ${q.options.map((o, k) => `
+            <button type="button" class="opt${chosen === o.v ? " selected" : ""}" data-v="${o.v}" id="opt-${i}-${k}">
+              <span class="key" aria-hidden="true">${KEYS[k]}</span><span>${esc(o.label)}</span>
+            </button>`).join("")}
+        </div>
+        <div class="q-nav">
+          <button type="button" class="btn btn-ghost-dark" id="back" ${i === 0 ? "disabled" : ""}>← Anterior</button>
+          ${q.term ? `<span>¿Dudas? Mira <button type="button" class="term-btn" data-term="${esc(q.term)}" style="color:var(--lime)">${esc(q.term)}</button> en el glosario</span>` : `<span>Elige una opción o usa las teclas A, B, C</span>`}
+        </div>
+      </div>`;
+  }
+
+  function resultsHTML() {
+    const res = computeResults(state.answers);
+    const profiles = Object.keys(CATS).map(k => ({ key: k, r: res[k], p: profileFor(k, res[k]) }));
+    const anyBlend = profiles.some(x => x.r.isBlend);
+    if (!sim) {
+      const hz = res.horizonte.winners.map(k => CATS.horizonte.years[k]);
+      sim = { cur: "L", initial: 5000, monthly: 1000, years: hz.length ? Math.max(...hz) : 10, rate: 8 };
+    }
+    return `
+      <div class="card" id="card">
+        <div class="panel res-hero">
+          <span class="tag">Tu resultado</span>
+          <h2>${profiles.map(x => `<span${x.r.isBlend ? "" : ' class="hl"'}>${esc(x.p.short)}</span>`).join(" · ")}</h2>
+          <p>${anyBlend
+            ? "En al menos una categoría tus respuestas quedaron empatadas, así que ahí tu perfil es Híbrido/Blend: combinas más de un enfoque. Eso es completamente válido."
+            : "Este es el estilo que predominó en cada una de las tres categorías. Abajo tienes qué significa, qué estudiar y un simulador para tu horizonte."}</p>
+          <div class="pills">
+            ${profiles.map(x => `<span class="pill ${x.r.isBlend ? "blend" : "win"}">${esc({ filosofia: "Filosofía", horizonte: "Horizonte", gestion: "Gestión" }[x.key])}: ${esc(x.p.short)}</span>`).join("")}
+          </div>
+          <div class="res-actions">
+            <button type="button" class="btn btn-lime" id="copy">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
+              Copiar mi resultado
+            </button>
+            <a class="btn btn-ghost-dark" href="${SKOOL_URL}" target="_blank" rel="noopener">Compartirlo en la comunidad →</a>
+            <span class="copied" id="copied" hidden></span>
+          </div>
+        </div>
+
+        <h2 class="section-title">Tu perfil, <span class="hl-green">categoría por categoría</span></h2>
+        <p class="section-sub">Las barras muestran cómo se repartieron tus respuestas. ¿Algún término nuevo? <button type="button" class="term-btn" id="gloss-inline">Abre el glosario</button>.</p>
+        <div class="results">
+          ${profiles.map(({ key, r, p }) => {
+            const cat = CATS[key]; const c = clarityOf(r);
+            return `
+            <article class="rcard${r.isBlend ? " is-blend" : ""}">
+              <div class="rcard-top">
+                <p class="eyebrow">${esc(cat.name)}</p>
+                <span class="chip${r.isBlend ? " blend" : ""}">${r.isBlend ? "Híbrido / Blend" : "Dominante"}</span>
+              </div>
+              <h3>${esc(p.title)}</h3>
+              <p>${esc(p.desc)}</p>
+              <div class="bars">
+                ${cat.order.map(s => {
+                  const pct = r.total ? Math.round(r.counts[s] / r.total * 100) : 0;
+                  return `<div class="bar-row${r.winners.includes(s) ? " win" : ""}">
+                    <span class="bar-label">${esc(cat.styles[s].label)}</span>
+                    <span class="bar-track"><span class="bar-fill" data-w="${pct}"></span></span>
+                    <span class="bar-pct">${pct}%</span></div>`;
+                }).join("")}
+              </div>
+              <p class="clarity">Claridad del resultado: <b>${c.label}</b> (${c.text}).</p>
+              <p class="tip"><b>Siguiente paso:</b> ${esc(p.tip)}</p>
+              <div class="study">
+                <p class="eyebrow">Para estudiar · no es recomendación de compra</p>
+                <div class="study-list">${p.study.map(s => `<span>${esc(s)}</span>`).join("")}</div>
+              </div>
+            </article>`;
+          }).join("")}
+        </div>
+
+        <h2 class="section-title">Simulador de <span class="hl-green">interés compuesto</span></h2>
+        <p class="section-sub">Ajustamos los años según tu horizonte. Cambia los valores y mira cuánto podría crecer tu dinero con aportes constantes.</p>
+        <div class="tool">
+          <div class="fields">
+            <div class="field"><label for="sim-cur">Moneda</label>
+              <select id="sim-cur"><option value="L">Lempiras (L)</option><option value="US$">Dólares (US$)</option></select></div>
+            <div class="field"><label for="sim-initial">Monto inicial</label><input id="sim-initial" type="number" min="0" step="100" inputmode="decimal"></div>
+            <div class="field"><label for="sim-monthly">Aporte mensual</label><input id="sim-monthly" type="number" min="0" step="50" inputmode="decimal"></div>
+            <div class="field"><label for="sim-years">Años</label><input id="sim-years" type="number" min="1" max="50" step="1" inputmode="numeric"></div>
+            <div class="field"><label for="sim-rate">Rendimiento anual %</label><input id="sim-rate" type="number" min="0" max="30" step="0.5" inputmode="decimal"></div>
+          </div>
+          <div class="sim-out">
+            <div class="stat"><span>Lo que aportas</span><b id="o-cont">–</b></div>
+            <div class="stat"><span>Ganancia por interés</span><b id="o-gain">–</b></div>
+            <div class="stat total"><span>Total estimado</span><b id="o-total">–</b></div>
+          </div>
+          <div>
+            <div class="stack" aria-hidden="true"><span class="s-cont" id="s-cont"></span><span class="s-gain" id="s-gain"></span></div>
+            <div class="legend"><span><i style="background:var(--forest)"></i>Tu dinero aportado</span><span><i style="background:var(--lime)"></i>Lo que generó el interés compuesto</span></div>
+          </div>
+          <p class="fineprint" id="sim-note"></p>
+        </div>
+
+        <h2 class="section-title">¿Estás listo para <span class="hl-green">empezar a invertir?</span></h2>
+        <p class="section-sub">Antes de tu primera inversión, revisa estos cinco puntos. Se guardan solo en este navegador.</p>
+        <div class="tool">
+          <div class="checks">
+            ${CHECKS.map((t, i) => `<label class="chk" for="chk-${i}"><input type="checkbox" id="chk-${i}" data-i="${i}" ${checks[i] ? "checked" : ""}><span>${esc(t)}</span></label>`).join("")}
+          </div>
+          <div class="chk-score"><span id="chk-label"></span><div class="stack"><span class="s-gain" id="chk-bar"></span></div></div>
+        </div>
+
+        <div class="panel community">
+          <span class="tag">Sigue aprendiendo</span>
+          <h2 style="margin-top:18px">Lleva tu resultado a la <span class="hl">comunidad</span></h2>
+          <p>Dentro de Inversiones 101 tienes la ruta paso a paso, sesiones en vivo y otros inversores con tu mismo estilo. Comparte tu perfil y pregunta por dónde empezar.</p>
+          <a class="btn skool-btn" href="${SKOOL_URL}" target="_blank" rel="noopener">
+            Ir a la comunidad en
+            <span class="skool-word" aria-label="Skool"><span class="s1">s</span><span class="s2">k</span><span class="s3">o</span><span class="s4">o</span><span class="s5">l</span></span>
+          </a>
+          <div class="res-actions"><button type="button" class="btn btn-ghost-dark" id="again">Volver a hacer el test</button></div>
+        </div>
+      </div>`;
+  }
+
+  // ---------- Simulador ----------
+  function fmt(n) {
+    const v = Math.round(n).toLocaleString("es-HN");
+    return sim.cur + " " + v;
+  }
+  function runSim() {
+    if (!sim) return;
+    const months = Math.max(0, Math.round(sim.years * 12));
+    const r = sim.rate / 100 / 12;
+    let bal = sim.initial;
+    for (let m = 0; m < months; m++) bal = bal * (1 + r) + sim.monthly;
+    const cont = sim.initial + sim.monthly * months;
+    const gain = Math.max(0, bal - cont);
+    $("o-cont").textContent = fmt(cont);
+    $("o-gain").textContent = fmt(gain);
+    $("o-total").textContent = fmt(bal);
+    const pc = bal > 0 ? cont / bal * 100 : 100;
+    $("s-cont").style.width = pc + "%";
+    $("s-gain").style.width = (100 - pc) + "%";
+    $("sim-note").textContent =
+      `Estimación con ${sim.rate}% anual compuesto mensualmente durante ${sim.years} ${sim.years == 1 ? "año" : "años"}. Como referencia, el S&P 500 ha promediado cerca de 10% anual en su historia, con años muy buenos y años negativos. Rendimientos pasados no garantizan resultados futuros.`;
+  }
+  function bindSim() {
+    const map = { "sim-cur": "cur", "sim-initial": "initial", "sim-monthly": "monthly", "sim-years": "years", "sim-rate": "rate" };
+    for (const [id, key] of Object.entries(map)) {
+      const el = $(id); if (!el) continue;
+      el.value = sim[key];
+      el.addEventListener("input", () => {
+        if (key === "cur") sim.cur = el.value;
+        else {
+          let v = parseFloat(el.value); if (!isFinite(v) || v < 0) v = 0;
+          if (key === "years") v = Math.min(v, 50);
+          if (key === "rate") v = Math.min(v, 30);
+          sim[key] = v;
+        }
+        runSim();
+      });
+    }
+    runSim();
+  }
+
+  // ---------- Checklist ----------
+  function renderChecks() {
+    const n = checks.filter(Boolean).length;
+    const msg = n === CHECKS.length ? "¡Listo! Tienes las bases para dar tu primer paso." :
+      n >= 3 ? "Vas muy bien. Completa lo que falta antes de invertir." : "Primero construye tus bases: es la parte más importante.";
+    $("chk-label").textContent = `${n} de ${CHECKS.length} · ${msg}`;
+    $("chk-bar").style.width = (n / CHECKS.length * 100) + "%";
+  }
+
+  function afterResults() {
+    requestAnimationFrame(() => document.querySelectorAll(".bar-fill").forEach(el => { el.style.width = el.dataset.w + "%"; }));
+    bindSim();
+    renderChecks();
+  }
+
+  // ---------- Transiciones ----------
+  function view() {
+    return state.screen === "intro" ? introHTML() : state.screen === "results" ? resultsHTML() : questionHTML(state.index);
+  }
+  function render({ scroll = false } = {}) {
+    const old = $("card");
+    const swap = () => {
+      stage.innerHTML = view();
+      setProgress();
+      const card = $("card");
+      if (!reduceMotion) { card.classList.add("entering"); void card.offsetWidth; card.classList.remove("entering"); }
+      if (state.screen === "results") afterResults();
+      if (scroll) window.scrollTo({ top: 0, behavior: reduceMotion ? "auto" : "smooth" });
+      const f = card.querySelector(".opt.selected, .opt, #start");
+      if (f) f.focus({ preventScroll: true });
+      busy = false;
+    };
+    if (!old || reduceMotion) return swap();
+    old.classList.add("leaving");
+    setTimeout(swap, 260);
+  }
+
+  // ---------- Acciones ----------
+  function choose(value, btn) {
+    if (busy) return;
+    busy = true;
+    state.answers[state.index] = value;
+    stage.querySelectorAll(".opt").forEach(o => o.classList.toggle("selected", o === btn));
+    setProgress();
+    setTimeout(() => {
+      if (state.index < TOTAL - 1) state.index++;
+      else { state.screen = "results"; sim = null; }
+      render({ scroll: state.screen === "results" });
+    }, reduceMotion ? 0 : 220);
+  }
+  function goBack() { if (busy || state.index === 0) return; busy = true; state.index--; render(); }
+  function begin() { if (busy) return; busy = true; state.screen = "quiz"; render(); }
+  function restart() {
+    busy = true;
+    state = fresh(); state.screen = "quiz"; sim = null;
+    closeGloss();
+    render({ scroll: true });
+  }
+
+  function copyResult() {
+    const res = computeResults(state.answers);
+    const lines = Object.keys(CATS).map(k => `• ${CATS[k].name}: ${profileFor(k, res[k]).title}`);
+    const text = `🧭 Mi estilo de inversión (Test Inversiones 101):\n${lines.join("\n")}\n\n¿Y tú qué estilo tienes?`;
+    const done = (ok) => { const c = $("copied"); c.hidden = false; c.textContent = ok ? "Copiado. Pégalo en un post de la comunidad." : "No se pudo copiar automáticamente. Selecciona tu resultado arriba."; };
+    try { navigator.clipboard.writeText(text).then(() => done(true), () => done(false)); } catch { done(false); }
+  }
+
+  // ---------- Glosario ----------
+  function renderGloss(filter = "", highlight = "") {
+    const f = filter.trim().toLowerCase();
+    const items = GLOSSARY.filter(([t, d]) => !f || t.toLowerCase().includes(f) || d.toLowerCase().includes(f));
+    $("gloss-list").innerHTML = items.length
+      ? items.map(([t, d]) => `<div class="term${t === highlight ? " flash" : ""}" data-t="${esc(t)}"><b>${esc(t)}</b><p>${esc(d)}</p></div>`).join("")
+      : `<p class="tip">No encontramos ese término. Pregúntalo en la comunidad y lo agregamos.</p>`;
+  }
+  let lastFocus = null;
+  function openGloss(term = "") {
+    lastFocus = document.activeElement;
+    $("gloss-search").value = "";
+    renderGloss("", term);
+    $("gloss").hidden = false;
+    const target = term && $("gloss-list").querySelector(".term.flash");
+    if (target) target.scrollIntoView({ block: "center" });
+    $("close-gloss").focus();
+  }
+  function closeGloss() {
+    if ($("gloss").hidden) return;
+    $("gloss").hidden = true;
+    if (lastFocus && document.contains(lastFocus)) lastFocus.focus();
+  }
+
+  // ---------- Eventos ----------
+  stage.addEventListener("click", (e) => {
+    const opt = e.target.closest(".opt"); if (opt) return choose(opt.dataset.v, opt);
+    const term = e.target.closest(".term-btn[data-term]"); if (term) return openGloss(term.dataset.term);
+    if (e.target.closest("#start")) return begin();
+    if (e.target.closest("#back")) return goBack();
+    if (e.target.closest("#again")) return restart();
+    if (e.target.closest("#copy")) return copyResult();
+    if (e.target.closest("#gloss-inline")) return openGloss();
+  });
+  stage.addEventListener("change", (e) => {
+    const c = e.target.closest("input[type=checkbox][data-i]");
+    if (c) { checks[+c.dataset.i] = c.checked; store.set("i101-checks", checks); renderChecks(); }
+  });
+  $("restart").addEventListener("click", restart);
+  $("open-gloss").addEventListener("click", () => openGloss());
+  $("close-gloss").addEventListener("click", closeGloss);
+  $("gloss").addEventListener("click", (e) => { if (e.target.id === "gloss") closeGloss(); });
+  $("gloss-search").addEventListener("input", (e) => renderGloss(e.target.value));
+
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "Escape") return closeGloss();
+    if (!$("gloss").hidden || state.screen !== "quiz" || e.metaKey || e.ctrlKey || e.altKey) return;
+    if (/^(INPUT|SELECT|TEXTAREA)$/.test(document.activeElement?.tagName)) return;
+    const k = e.key.toUpperCase();
+    let idx = KEYS.indexOf(k);
+    if (idx === -1 && /^[1-4]$/.test(k)) idx = Number(k) - 1;
+    const opts = stage.querySelectorAll(".opt");
+    if (idx >= 0 && opts[idx]) { e.preventDefault(); choose(opts[idx].dataset.v, opts[idx]); }
+  });
+
+  // Conserva el progreso si la página se actualiza dentro del visor.
+  window.claude?.hot?.snapshot?.(() => ({ state, sim }));
+  const start = (data) => {
+    if (data && data.state && Array.isArray(data.state.answers) && data.state.answers.length === TOTAL) { state = data.state; sim = data.sim || null; }
+    stage.innerHTML = view();
+    setProgress();
+    if (state.screen === "results") afterResults();
+  };
+  window.claude?.hot?.ready ? window.claude.hot.ready(start) : start(window.claude?.hot?.data ?? {});
+})();
+</script>
