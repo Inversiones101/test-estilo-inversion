@@ -21,12 +21,12 @@ mkdir -p public
 <meta property="og:title" content="¿Qué tipo de inversor eres? · Inversiones 101">
 <meta property="og:description" content="12 situaciones del día a día para descubrir tu estilo de inversión. Herramienta para miembros de la comunidad.">
 <meta property="og:url" content="https://test.inversiones101.lat/">
-<meta property="og:image" content="https://test-estilo-inversion.vercel.app/og.png">
+<meta property="og:image" content="https://test.inversiones101.lat/og.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:image:alt" content="¿Qué tipo de inversor eres? Test de Inversiones 101">
 <meta name="twitter:card" content="summary_large_image">
-<meta name="twitter:image" content="https://test-estilo-inversion.vercel.app/og.png">
+<meta name="twitter:image" content="https://test.inversiones101.lat/og.png">
 HEAD
   sed -n '1,/<\/style>/p' "$SRC"
   printf '</head>\n<body>\n'
