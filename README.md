@@ -17,4 +17,4 @@ Test interactivo para los miembros de la comunidad de Inversiones 101 en Skool.
 
 ## Publicar cambios
 
-Haz commit y `git push` a la rama `main`: Vercel publica automáticamente en producción.
+Haz commit y `git push` a la rama `main`: Vercel ejecuta `build.sh` y publica automáticamente en producción. Las ramas distintas de `main` generan una vista previa privada.
