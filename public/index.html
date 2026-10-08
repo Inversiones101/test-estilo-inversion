@@ -163,14 +163,52 @@
   .intro-cta small { color: var(--on-forest-muted); }
 
   /* ---------- Resultados (papel) ---------- */
-  .res-hero h2 { font-size: clamp(1.9rem, 6vw, 3rem); margin-top: 20px; }
-  .res-hero p { color: var(--on-forest-muted); margin: 14px 0 0; max-width: 58ch; }
-  .pills { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
-  .pill { font: 700 .92rem/1 var(--font-body); padding: 9px 14px; border-radius: 999px; background: var(--forest-2); border: 1.5px solid rgba(242,243,238,.18); }
-  .pill.win { border-color: var(--lime); color: var(--lime); }
-  .pill.blend { border-color: #F0B04A; color: #F0B04A; }
   .res-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 24px; }
-  .copied { color: var(--lime); font-size: .88rem; align-self: center; }
+
+  /* Tarjeta para compartir (formato 4:5, escala con su ancho para verse igual en captura) */
+  .share { display: grid; grid-template-columns: minmax(0, 440px) minmax(0, 1fr); gap: clamp(20px, 4vw, 40px); align-items: center; }
+  .share-side h2 { font-size: clamp(1.7rem, 5vw, 2.5rem); margin-top: 18px; }
+  .share-side p { color: var(--on-forest-muted); margin: 12px 0 0; max-width: 46ch; }
+  .name-field { display: grid; gap: 6px; margin-top: 20px; max-width: 320px; }
+  .name-field label { font: 600 .82rem/1.2 var(--font-body); color: var(--on-forest-muted); }
+  .name-field input { font: 600 1rem/1 var(--font-body); color: var(--on-forest); background: var(--forest-2); border: 1.5px solid rgba(242,243,238,.18); border-radius: 12px; padding: 12px; }
+  .name-field input:focus { outline: none; border-color: var(--lime); }
+  .share-msg { color: var(--lime); font-size: .88rem; margin: 12px 0 0; min-height: 1.3em; }
+  .scard {
+    container-type: inline-size; position: relative; overflow: hidden; isolation: isolate;
+    width: 100%; aspect-ratio: 4 / 5; border-radius: 22px;
+    background: radial-gradient(120% 80% at 100% 0%, #0E4A3C 0%, #03302A 55%, #022620 100%);
+    color: #F2F3EE; box-shadow: 0 18px 50px rgba(0,0,0,.35); border: 1px solid rgba(162,226,26,.25);
+  }
+  .scard .ring { position: absolute; z-index: -1; border-radius: 50%; border: .45cqw solid rgba(162,226,26,.28); }
+  .scard .ring.a { width: 120cqw; height: 120cqw; right: -62cqw; top: -18cqw; }
+  .scard .ring.b { width: 66cqw; height: 66cqw; right: -30cqw; top: 9cqw; }
+  .scard-in { position: absolute; inset: 6.5cqw 7cqw; display: flex; flex-direction: column; }
+  .sc-top { display: flex; justify-content: space-between; align-items: center; gap: 3cqw; }
+  .sc-brand { display: flex; align-items: center; gap: 2.6cqw; font: 800 4.3cqw/1 var(--font-display); letter-spacing: -.02em; }
+  .sc-badge { position: relative; width: 9.5cqw; height: 9.5cqw; border-radius: 2.6cqw; background: #0A3F35; display: grid; place-items: center; font: 800 3.2cqw/1 var(--font-display); }
+  .sc-badge::after { content: ""; position: absolute; top: -1cqw; right: -1cqw; width: 3cqw; height: 3cqw; border-radius: 50%; background: #A2E21A; }
+  .sc-date { font: 600 2.9cqw/1 var(--font-body); color: #A7BBB3; }
+  .sc-who { margin-top: 6.5cqw; font: 600 3.6cqw/1.2 var(--font-body); color: #A7BBB3; }
+  .sc-who b { color: #F2F3EE; }
+  .sc-title { margin-top: 1.5cqw; font: 900 11cqw/.95 var(--font-display); letter-spacing: -.045em; text-wrap: balance; }
+  .sc-title span { color: #A2E21A; display: block; }
+  .sc-title.long { font-size: 9cqw; }
+  .sc-motto { margin-top: 3.5cqw; font: 600 3.8cqw/1.3 var(--font-body); color: #DCE6E1; max-width: 80cqw; }
+  .sc-stats { margin-top: auto; display: grid; gap: 3.4cqw; }
+  .sc-row { display: grid; gap: 1.8cqw; }
+  .sc-head { display: flex; align-items: baseline; gap: 2.5cqw; white-space: nowrap; }
+  .sc-head small { flex: none; width: 21cqw; font: 700 2.5cqw/1 var(--font-body); text-transform: uppercase; letter-spacing: .1em; color: #A7BBB3; }
+  .sc-head b { flex: 1; min-width: 0; overflow: hidden; text-overflow: ellipsis; font: 800 4.3cqw/1.1 var(--font-display); letter-spacing: -.02em; }
+  .sc-head em { flex: none; font: 800 3.4cqw/1 var(--font-body); font-style: normal; color: #A2E21A; font-variant-numeric: tabular-nums; }
+  .sc-row.blend .sc-head em { color: #F2C25A; }
+  .sc-bar { height: 2.2cqw; border-radius: 99px; background: rgba(242,243,238,.12); overflow: hidden; position: relative; }
+  .sc-bar i { position: absolute; inset: 0 auto 0 0; border-radius: 99px; background: linear-gradient(90deg, #7CC21E, #A2E21A); }
+  .sc-row.blend .sc-bar i { background: linear-gradient(90deg, #E0A21B, #F2C25A); }
+  .sc-foot { margin-top: 4.5cqw; padding-top: 3.5cqw; border-top: .3cqw solid rgba(242,243,238,.16); display: flex; justify-content: space-between; align-items: center; gap: 3cqw; font: 600 3cqw/1.2 var(--font-body); color: #A7BBB3; }
+  .sc-foot b { color: #F2F3EE; }
+  .sc-tag { background: #A2E21A; color: #062A1F; font: 800 3cqw/1 var(--font-body); padding: 2cqw 3.2cqw; border-radius: 99px; white-space: nowrap; }
+  @media (max-width: 760px) { .share { grid-template-columns: 1fr; } .scard { max-width: 440px; } }
 
   .section-title { font-size: clamp(1.5rem, 4.5vw, 2rem); margin-top: 44px; }
   .section-sub { color: var(--muted); margin: 8px 0 0; max-width: 60ch; }
@@ -412,7 +450,11 @@
       { text: "Te llega un bono de L 10,000 y decides invertirlo. ¿Cuándo crees que lo vas a usar?",
         options: [ { label: "En unos meses, para algo que ya tengo planeado.", v: "corto" }, { label: "En 2 o 3 años, para una meta importante.", v: "medio" }, { label: "No lo pienso tocar en muchos años.", v: "largo" } ] },
       { text: "Si tu inversión no se pudiera retirar por un tiempo, ¿cuánto podrías esperar sin problema?",
-        options: [ { label: "Unos meses, como máximo.", v: "corto" }, { label: "Entre 1 y 5 años.", v: "medio" }, { label: "Más de 5 años. No me afectaría.", v: "largo" } ] }
+        options: [ { label: "Unos meses, como máximo.", v: "corto" }, { label: "Entre 1 y 5 años.", v: "medio" }, { label: "Más de 5 años. No me afectaría.", v: "largo" } ] },
+      { text: "Abres una cuenta de inversión. ¿Cuándo revisarías si lograste tu objetivo?",
+        options: [ { label: "Dentro de unos meses.", v: "corto" }, { label: "En 2 o 3 años.", v: "medio" }, { label: "En 10 años o más.", v: "largo" } ] },
+      { text: "Te sobran L 3,000 este mes después de pagar todo. ¿Qué haces con ellos?",
+        options: [ { label: "Los guardo para un gasto que tengo en los próximos meses.", v: "corto" }, { label: "Los aparto para una meta de los próximos años.", v: "medio" }, { label: "Los invierto y me olvido de ellos por mucho tiempo.", v: "largo" } ] }
     ] },
     { cat: "filosofia", variants: [
       { text: "Vas a comprar un carro usado. ¿Cuál eliges?",
@@ -429,7 +471,11 @@
         options: [
           { label: "Una usada de buena marca, en buen estado, a precio de remate.", v: "value" },
           { label: "Una eléctrica nueva, con tecnología del futuro, aunque sea más cara.", v: "growth" },
-          { label: "Una sencilla para trabajar haciendo entregas y ganar dinero cada semana.", v: "dividendos" } ] }
+          { label: "Una sencilla para trabajar haciendo entregas y ganar dinero cada semana.", v: "dividendos" } ] },
+      { text: "Vas a comprar una computadora para trabajar. ¿Cuál eliges?",
+        options: [ { label: "Una de marca reconocida, reacondicionada, a mitad de precio.", v: "value" }, { label: "La más potente del mercado, lista para los programas del futuro.", v: "growth" }, { label: "Una sencilla y confiable para hacer trabajos por encargo que te paguen cada mes.", v: "dividendos" } ] },
+      { text: "Vas a comprar una refrigeradora. ¿Cuál eliges?",
+        options: [ { label: "Una de excelente marca con un pequeño rayón, en liquidación.", v: "value" }, { label: "Una inteligente de última generación, aunque sea más cara.", v: "growth" }, { label: "Una grande para vender refrescos y helados desde tu casa.", v: "dividendos" } ] }
     ] },
     { cat: "gestion", variants: [
       { text: "Tienes un sábado libre. ¿Qué prefieres hacer con tus inversiones?",
@@ -437,7 +483,11 @@
       { text: "Sale una noticia importante sobre una empresa en la que invertiste. ¿Qué haces?",
         options: [ { label: "La leo completa y analizo si debo comprar más o vender.", v: "activa" }, { label: "No hago nada. Mi plan es de largo plazo y no depende de una noticia.", v: "pasiva" } ] },
       { text: "¿Cómo te imaginas revisando tus inversiones?",
-        options: [ { label: "Varias veces al mes, ajustando y buscando nuevas oportunidades.", v: "activa" }, { label: "Una o dos veces al año, solo para confirmar que todo sigue en orden.", v: "pasiva" } ] }
+        options: [ { label: "Varias veces al mes, ajustando y buscando nuevas oportunidades.", v: "activa" }, { label: "Una o dos veces al año, solo para confirmar que todo sigue en orden.", v: "pasiva" } ] },
+      { text: "Abres la app donde tienes tus inversiones. ¿Qué haces?",
+        options: [ { label: "Reviso gráficos, noticias y busco qué comprar o vender.", v: "activa" }, { label: "Confirmo que mi aporte del mes se hizo y la cierro.", v: "pasiva" } ] },
+      { text: "¿Cómo te gustaría que fuera tu plan de inversión?",
+        options: [ { label: "Flexible, para cambiarlo según lo que vea en el mercado.", v: "activa" }, { label: "Automático, para no tener que pensar en él.", v: "pasiva" } ] }
     ] },
     { cat: "filosofia", variants: [
       { text: "Te ofrecen ser socio de un negocio. ¿Cuál te convence más?",
@@ -454,7 +504,11 @@
         options: [
           { label: "Una finca tradicional con buen grano, que se vende por debajo de lo que vale.", v: "value" },
           { label: "Una cafetería moderna que abre una sucursal nueva cada pocos meses.", v: "growth" },
-          { label: "Una exportadora estable que paga a sus socios cada trimestre.", v: "dividendos" } ] }
+          { label: "Una exportadora estable que paga a sus socios cada trimestre.", v: "dividendos" } ] },
+      { text: "Puedes invertir en una empresa de transporte. ¿Cuál eliges?",
+        options: [ { label: "Una flota de buses confiable que se vende barata mientras termina de pagar sus deudas.", v: "value" }, { label: "Una app de viajes que se expande a nuevas ciudades cada año.", v: "growth" }, { label: "Una empresa de taxis estable que reparte ganancias cada mes.", v: "dividendos" } ] },
+      { text: "Te invitan a invertir en un gimnasio. ¿Cuál te convence?",
+        options: [ { label: "Uno con buena clientela, en venta por debajo de su valor porque el dueño se muda.", v: "value" }, { label: "Una cadena nueva que está abriendo sedes en todo el país.", v: "growth" }, { label: "Uno de barrio, estable, que paga a sus socios cada mes.", v: "dividendos" } ] }
     ] },
     { cat: "horizonte", variants: [
       { text: "¿Cuál de estas metas se parece más a la tuya?",
@@ -462,7 +516,11 @@
       { text: "Imagina que ya lograste tu meta con tus inversiones. ¿Cuál fue?",
         options: [ { label: "Me di un gusto que quería este año.", v: "corto" }, { label: "Pagué la prima de mi casa o de mi carro.", v: "medio" }, { label: "Puedo vivir de mis inversiones sin depender de un salario.", v: "largo" } ] },
       { text: "¿Para qué estás aprendiendo a invertir?",
-        options: [ { label: "Para hacer crecer un dinero que voy a usar pronto.", v: "corto" }, { label: "Para un proyecto de los próximos años: boda, estudios o negocio.", v: "medio" }, { label: "Para construir patrimonio y asegurar mi futuro.", v: "largo" } ] }
+        options: [ { label: "Para hacer crecer un dinero que voy a usar pronto.", v: "corto" }, { label: "Para un proyecto de los próximos años: boda, estudios o negocio.", v: "medio" }, { label: "Para construir patrimonio y asegurar mi futuro.", v: "largo" } ] },
+      { text: "Si le pusieras nombre a tu cuenta de inversión, ¿cuál sería?",
+        options: [ { label: "\"Para el próximo viaje\".", v: "corto" }, { label: "\"Mi casa propia\".", v: "medio" }, { label: "\"Mi retiro tranquilo\".", v: "largo" } ] },
+      { text: "¿Qué foto te gustaría tomarte gracias a tus inversiones?",
+        options: [ { label: "Estrenando algo que quiero este año.", v: "corto" }, { label: "Recibiendo las llaves de mi casa o de mi carro.", v: "medio" }, { label: "Disfrutando mi tiempo libre sin preocuparme por el dinero.", v: "largo" } ] }
     ] },
     { cat: "gestion", variants: [
       { text: "¿Qué forma de invertir te suena mejor?", term: "Fondo indexado (ETF)",
@@ -473,7 +531,11 @@
           { label: "Uso la selección como base y agrego un par de jugadores escogidos por mí.", v: "activa+pasiva" } ] },
       { text: "Vas a preparar la cena del fin de semana. ¿Qué prefieres?", hint: "Invertir funciona parecido: puedes escoger cada ingrediente o comprar el combo completo.",
         options: [ { label: "Cocinar desde cero, escogiendo cada ingrediente.", v: "activa" }, { label: "Pedir un combo completo que ya sé que es bueno.", v: "pasiva" },
-          { label: "Pedir el combo y prepararle un acompañamiento propio.", v: "activa+pasiva" } ] }
+          { label: "Pedir el combo y prepararle un acompañamiento propio.", v: "activa+pasiva" } ] },
+      { text: "Vas a armar la música para un viaje largo. ¿Cómo lo haces?", hint: "Invertir funciona parecido: puedes escoger cada pieza o tomar el paquete completo.",
+        options: [ { label: "Escojo cada canción una por una.", v: "activa" }, { label: "Pongo una playlist popular ya armada.", v: "pasiva" }, { label: "Pongo una playlist armada y le agrego mis canciones favoritas.", v: "activa+pasiva" } ] },
+      { text: "Vas a hacer el súper del mes. ¿Cómo compras?", hint: "Invertir funciona parecido: puedes escoger cada producto o llevar la canasta completa.",
+        options: [ { label: "Comparo cada producto y su precio en varias tiendas.", v: "activa" }, { label: "Compro la canasta de siempre en un solo lugar.", v: "pasiva" }, { label: "Compro la canasta de siempre y agrego algunas ofertas que encuentro.", v: "activa+pasiva" } ] }
     ] },
     { cat: "filosofia", variants: [
       { text: "¿Qué frase te representa más?",
@@ -481,7 +543,11 @@
       { text: "¿Cuál de estos consejos guardarías?",
         options: [ { label: "\"Lo bueno y barato existe; hay que saber buscarlo.\"", v: "value" }, { label: "\"El mayor riesgo es quedarse fuera de lo que viene.\"", v: "growth" }, { label: "\"Mejor un ingreso seguro cada mes que una promesa grande.\"", v: "dividendos" } ] },
       { text: "Si tu inversión fuera un árbol, ¿cuál sería?",
-        options: [ { label: "Un árbol grande que conseguiste a precio de arbusto.", v: "value" }, { label: "Un árbol joven que crece rapidísimo.", v: "growth" }, { label: "Un árbol frutal que te da cosecha cada temporada.", v: "dividendos" } ] }
+        options: [ { label: "Un árbol grande que conseguiste a precio de arbusto.", v: "value" }, { label: "Un árbol joven que crece rapidísimo.", v: "growth" }, { label: "Un árbol frutal que te da cosecha cada temporada.", v: "dividendos" } ] },
+      { text: "Si tu inversión fuera un jugador de fútbol, ¿cuál sería?",
+        options: [ { label: "Un veterano talentoso que fichaste barato.", v: "value" }, { label: "Una joven promesa que puede llegar a ser estrella.", v: "growth" }, { label: "Un titular constante que rinde todos los partidos.", v: "dividendos" } ] },
+      { text: "¿Qué superpoder te gustaría tener como inversionista?",
+        options: [ { label: "Saber cuánto vale realmente cada cosa.", v: "value" }, { label: "Saber qué empresas serán gigantes en el futuro.", v: "growth" }, { label: "Recibir dinero cada mes sin trabajar más.", v: "dividendos" } ] }
     ] },
     { cat: "horizonte", variants: [
       { text: "Tu inversión baja 15% en una semana. ¿Qué haces?", hint: "No hay respuesta correcta: piensa en lo que harías de verdad.",
@@ -489,7 +555,11 @@
       { text: "Las noticias dicen que la bolsa podría caer este año. ¿Qué haces con tu inversión?", hint: "No hay respuesta correcta: piensa en lo que harías de verdad.",
         options: [ { label: "La retiro ahora. No quiero arriesgar ese dinero.", v: "corto" }, { label: "Bajo un poco el riesgo y espero a ver qué pasa.", v: "medio" }, { label: "Sigo igual. En 10 años esto será un mal recuerdo.", v: "largo" } ] },
       { text: "Pasan 6 meses y tu inversión sigue igual, sin ganancias. ¿Cómo te sientes?",
-        options: [ { label: "Frustrado: esperaba ver resultados ya.", v: "corto" }, { label: "Un poco impaciente, pero le doy uno o dos años más.", v: "medio" }, { label: "Tranquilo: el crecimiento de verdad toma años.", v: "largo" } ] }
+        options: [ { label: "Frustrado: esperaba ver resultados ya.", v: "corto" }, { label: "Un poco impaciente, pero le doy uno o dos años más.", v: "medio" }, { label: "Tranquilo: el crecimiento de verdad toma años.", v: "largo" } ] },
+      { text: "Tu inversión sube 20% en dos meses. ¿Qué haces?", hint: "No hay respuesta correcta: piensa en lo que harías de verdad.",
+        options: [ { label: "Vendo y aseguro la ganancia ya.", v: "corto" }, { label: "Saco una parte y dejo el resto un tiempo más.", v: "medio" }, { label: "No toco nada. Mi plan es para muchos años.", v: "largo" } ] },
+      { text: "Cada cierto tiempo, la bolsa tiene caídas fuertes. ¿Cómo te hace sentir eso?", hint: "No hay respuesta correcta: piensa en lo que sentirías de verdad.",
+        options: [ { label: "Nervioso. Prefiero algo sin bajones, aunque gane menos.", v: "corto" }, { label: "Lo acepto si mi meta está a unos años de distancia.", v: "medio" }, { label: "Tranquilo. Históricamente, la bolsa se ha recuperado con el tiempo.", v: "largo" } ] }
     ] },
     { cat: "gestion", variants: [
       { text: "¿Cuánto tiempo a la semana puedes dedicarle a tus inversiones?",
@@ -497,7 +567,11 @@
       { text: "¿Qué te gustaría aprender primero?",
         options: [ { label: "Cómo analizar una empresa y saber si está barata o cara.", v: "activa" }, { label: "Cómo armar un plan automático con fondos indexados.", v: "pasiva" } ] },
       { text: "Si invertir fuera un deporte, ¿cómo lo vivirías?",
-        options: [ { label: "Como jugador: quiero estar en la cancha tomando decisiones.", v: "activa" }, { label: "Como aficionado: confío en el equipo y veo el resultado al final.", v: "pasiva" } ] }
+        options: [ { label: "Como jugador: quiero estar en la cancha tomando decisiones.", v: "activa" }, { label: "Como aficionado: confío en el equipo y veo el resultado al final.", v: "pasiva" } ] },
+      { text: "¿Qué tipo de contenido sobre inversiones disfrutas más?",
+        options: [ { label: "Análisis de empresas, números y gráficos.", v: "activa" }, { label: "Consejos para automatizar y no complicarse.", v: "pasiva" } ] },
+      { text: "Si tu inversión fuera un carro, ¿cómo lo manejarías?",
+        options: [ { label: "Manual: quiero controlar cada cambio.", v: "activa" }, { label: "Automático: llego igual con menos esfuerzo.", v: "pasiva" } ] }
     ] },
     { cat: "filosofia", variants: [
       { text: "Una acción que te gusta baja 30% en un mes. ¿Qué es lo primero que piensas?", term: "Dividendo",
@@ -505,7 +579,11 @@
       { text: "Estás revisando una empresa para invertir. ¿Qué dato miras primero?", term: "Dividendo",
         options: [ { label: "Si su precio está por debajo de lo que realmente vale.", v: "value" }, { label: "Qué tan rápido crecen sus ventas cada año.", v: "growth" }, { label: "Cuánto paga de dividendo y si lo ha mantenido.", v: "dividendos" } ] },
       { text: "¿Qué titular te emocionaría más sobre una empresa en la que invertiste?", term: "Dividendo",
-        options: [ { label: "\"Analistas: la acción está barata para lo que vale la empresa.\"", v: "value" }, { label: "\"La empresa duplica sus clientes en un año.\"", v: "growth" }, { label: "\"La empresa aumenta su dividendo por décimo año seguido.\"", v: "dividendos" } ] }
+        options: [ { label: "\"Analistas: la acción está barata para lo que vale la empresa.\"", v: "value" }, { label: "\"La empresa duplica sus clientes en un año.\"", v: "growth" }, { label: "\"La empresa aumenta su dividendo por décimo año seguido.\"", v: "dividendos" } ] },
+      { text: "Tienes dos empresas del mismo sector. ¿Cuál compras?", term: "Dividendo",
+        options: [ { label: "La más barata en relación con lo que gana.", v: "value" }, { label: "La que está creciendo más rápido.", v: "growth" }, { label: "La que paga el dividendo más estable.", v: "dividendos" } ] },
+      { text: "¿Cómo prefieres ganar dinero con una acción?", term: "Dividendo",
+        options: [ { label: "Comprarla barata y esperar a que el mercado reconozca su valor.", v: "value" }, { label: "Que su precio se multiplique porque la empresa creció mucho.", v: "growth" }, { label: "Recibir pagos cada trimestre mientras la mantengo.", v: "dividendos" } ] }
     ] },
     { cat: "horizonte", variants: [
       { text: "¿Cada cuánto te gustaría ver resultados de tu inversión?",
@@ -513,7 +591,11 @@
       { text: "¿Qué tan rápido quieres ver crecer tu dinero?",
         options: [ { label: "Quiero ver resultados en pocos meses.", v: "corto" }, { label: "En uno o dos años está bien.", v: "medio" }, { label: "Sin prisa: me importa cuánto tendré en 10 o 20 años.", v: "largo" } ] },
       { text: "Si hoy sembraras una semilla de inversión, ¿cuándo quisieras cosechar?",
-        options: [ { label: "Esta misma temporada.", v: "corto" }, { label: "En un par de años.", v: "medio" }, { label: "Cuando sea un árbol grande, aunque tarde una década.", v: "largo" } ] }
+        options: [ { label: "Esta misma temporada.", v: "corto" }, { label: "En un par de años.", v: "medio" }, { label: "Cuando sea un árbol grande, aunque tarde una década.", v: "largo" } ] },
+      { text: "¿Cuál de estas ganancias te haría más feliz?",
+        options: [ { label: "Un 5% en un mes.", v: "corto" }, { label: "Un 30% en tres años.", v: "medio" }, { label: "Multiplicar mi dinero varias veces en 20 años.", v: "largo" } ] },
+      { text: "Si tu inversión fuera un viaje, ¿cuál sería?",
+        options: [ { label: "Una escapada de fin de semana.", v: "corto" }, { label: "Un viaje de unas semanas, bien planeado.", v: "medio" }, { label: "Una vuelta al mundo que toma años.", v: "largo" } ] }
     ] },
     { cat: "gestion", variants: [
       { text: "¿Crees que puedes encontrar oportunidades que la mayoría no ve?",
@@ -521,19 +603,27 @@
       { text: "Un amigo te cuenta que este año le ganó al mercado eligiendo acciones. ¿Qué piensas?",
         options: [ { label: "Quiero aprender a hacer lo mismo.", v: "activa" }, { label: "Puede pasar un año, pero casi nadie lo logra siempre. Prefiero seguir al mercado.", v: "pasiva" } ] },
       { text: "¿Qué te da más tranquilidad?",
-        options: [ { label: "Saber exactamente en qué empresas estoy y por qué las elegí.", v: "activa" }, { label: "Saber que estoy en cientos de empresas sin tener que vigilarlas.", v: "pasiva" } ] }
+        options: [ { label: "Saber exactamente en qué empresas estoy y por qué las elegí.", v: "activa" }, { label: "Saber que estoy en cientos de empresas sin tener que vigilarlas.", v: "pasiva" } ] },
+      { text: "¿Cuál de estas frases va más contigo?",
+        options: [ { label: "\"Si quiero resultados distintos, tengo que hacer algo distinto.\"", v: "activa" }, { label: "\"No necesito ganarle al mercado; me basta con crecer con él.\"", v: "pasiva" } ] },
+      { text: "Una acción que elegiste baja mientras el mercado sube. ¿Qué piensas?",
+        options: [ { label: "\"Voy a revisar qué pasó y decidir si sigo confiando en ella.\"", v: "activa" }, { label: "\"Por esto prefiero tener todo el mercado y no depender de una sola.\"", v: "pasiva" } ] }
     ] }
   ];
 
-  // Arma un intento: una versión por posición (distinta a la del intento anterior si se puede)
-  // y respuestas en orden aleatorio. Las de horizonte conservan su orden (corto → largo) porque son una escala,
+  // Arma un intento: cada posición funciona como un mazo. Se elige al azar una versión que el alumno
+  // todavía no haya visto; cuando ya vio todas, el mazo se reinicia (sin repetir la última).
+  // Las respuestas van en orden aleatorio. Las de horizonte conservan su orden (corto → largo) porque son una escala,
   // y las opciones mixtas ("activa+pasiva") quedan al final.
   const shuffle = (arr) => { const a = [...arr]; for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; };
-  function newRound(prev) {
+  function newRound(seen) {
     return SLOTS.map((slot, i) => {
-      let pool = slot.variants.map((_, k) => k);
-      if (prev && pool.length > 1) pool = pool.filter(k => k !== prev[i]?.v);
+      const all = slot.variants.map((_, k) => k);
+      let used = (seen[i] || []).filter(k => k < all.length);
+      let pool = all.filter(k => !used.includes(k));
+      if (!pool.length) { const last = used[used.length - 1]; used = []; pool = all.filter(k => k !== last); }
       const v = pool[Math.floor(Math.random() * pool.length)];
+      seen[i] = [...used, v];
       const opts = slot.variants[v].options.map((_, k) => k);
       const mixed = opts.filter(k => slot.variants[v].options[k].v.includes("+"));
       const single = opts.filter(k => !mixed.includes(k));
@@ -589,11 +679,11 @@
 
   // ---------- Estado ----------
   // Cada intento recuerda las versiones usadas, para que el siguiente (incluso otro día) sea distinto.
-  function fresh(current) {
-    const saved = store.get("i101-round", null);
-    const prev = current || (Array.isArray(saved) && saved.length === TOTAL ? saved : null);
-    const round = newRound(prev);
-    store.set("i101-round", round);
+  let seen = store.get("i101-seen", null);
+  if (!Array.isArray(seen) || seen.length !== TOTAL) seen = SLOTS.map(() => []);
+  function fresh() {
+    const round = newRound(seen);
+    store.set("i101-seen", seen);
     QUESTIONS = questionsFor(round);
     return { screen: "intro", index: 0, answers: new Array(TOTAL).fill(null), round };
   }
@@ -625,6 +715,30 @@
       out[catKey] = { counts, total, max, winners, isBlend: winners.length > 1 };
     }
     return out;
+  }
+
+  const MOTTOS = {
+    value: "Compro calidad cuando está en oferta.",
+    growth: "Invierto hoy en lo que viene mañana.",
+    dividendos: "Pongo mi dinero a pagarme un sueldo."
+  };
+  const HZ_WORD = { corto: "con metas de corto plazo", medio: "con metas de mediano plazo", largo: "con visión de largo plazo" };
+
+  // Datos de la tarjeta para compartir (titular, lema y filas con porcentaje).
+  function cardData(res) {
+    const f = res.filosofia, h = res.horizonte, g = res.gestion;
+    const fNames = f.winners.map(k => CATS.filosofia.styles[k].label);
+    const title = f.isBlend ? fNames.join(" + ") : (f.winners[0] === "dividendos" ? "de Dividendos" : fNames[0]);
+    const hz = h.isBlend ? "con metas en varios plazos" : HZ_WORD[h.winners[0]];
+    const motto = f.isBlend ? `Combino lo mejor de ${fNames.join(" y ")}, ${hz}.`
+                            : `${MOTTOS[f.winners[0]]} ${hz[0].toUpperCase() + hz.slice(1)}.`;
+    const rows = Object.keys(CATS).map(k => {
+      const r = res[k], p = profileFor(k, r);
+      return { label: { filosofia: "Filosofía", horizonte: "Horizonte", gestion: "Gestión" }[k],
+               value: r.isBlend ? p.title.replace(/^Híbrido /, "") : CATS[k].styles[r.winners[0]].label,
+               pct: r.total ? Math.round(r.max / r.total * 100) : 0, blend: r.isBlend };
+    });
+    return { title, motto, rows, long: title.length > 14 };
   }
 
   function profileFor(catKey, r) {
@@ -714,22 +828,27 @@
     }
     return `
       <div class="card" id="card">
-        <div class="panel res-hero">
-          <span class="tag">Tu resultado</span>
-          <h2>${profiles.map(x => `<span${x.r.isBlend ? "" : ' class="hl"'}>${esc(x.p.short)}</span>`).join(" · ")}</h2>
-          <p>${anyBlend
-            ? "En al menos una categoría tus respuestas quedaron empatadas, así que ahí tu perfil es Híbrido/Blend: combinas más de un enfoque. Eso es completamente válido."
-            : "Este es el estilo que predominó en cada una de las tres categorías. Abajo tienes qué significa, qué estudiar y un simulador para tu horizonte."}</p>
-          <div class="pills">
-            ${profiles.map(x => `<span class="pill ${x.r.isBlend ? "blend" : "win"}">${esc({ filosofia: "Filosofía", horizonte: "Horizonte", gestion: "Gestión" }[x.key])}: ${esc(x.p.short)}</span>`).join("")}
-          </div>
-          <div class="res-actions">
-            <button type="button" class="btn btn-lime" id="copy">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="9" y="9" width="13" height="13" rx="2"/><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"/></svg>
-              Copiar mi resultado
-            </button>
-            <a class="btn btn-ghost-dark" href="${SKOOL_URL}" target="_blank" rel="noopener">Compartirlo en la comunidad →</a>
-            <span class="copied" id="copied" hidden></span>
+        <div class="panel share">
+          ${shareCardHTML(res)}
+          <div class="share-side">
+            <span class="tag">Tu resultado</span>
+            <h2>Comparte tu estilo en la <span class="hl">comunidad</span></h2>
+            <p>${anyBlend
+              ? "En al menos una categoría tus respuestas quedaron empatadas: ahí tu perfil es Híbrido/Blend y combinas más de un enfoque. Es completamente válido."
+              : "Guarda tu tarjeta o tómale captura y publícala en Inversiones 101 con #MiEstilo101. Abajo tienes qué significa cada parte de tu resultado."}</p>
+            <div class="name-field">
+              <label for="card-name">Tu nombre en la tarjeta (opcional)</label>
+              <input id="card-name" type="text" maxlength="24" autocomplete="given-name" placeholder="Ej.: Ana" value="${esc(cardName)}">
+            </div>
+            <div class="res-actions">
+              <button type="button" class="btn btn-lime" id="save-card">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>
+                Guardar imagen
+              </button>
+              <button type="button" class="btn btn-ghost-dark" id="copy">Copiar texto</button>
+              <a class="btn btn-ghost-dark" href="${SKOOL_URL}" target="_blank" rel="noopener">Publicar en la comunidad →</a>
+            </div>
+            <p class="share-msg" id="copied" role="status"></p>
           </div>
         </div>
 
@@ -905,16 +1024,84 @@
   function begin() { if (busy) return; busy = true; state.screen = "quiz"; render(); }
   function restart() {
     busy = true;
-    state = fresh(state.round); state.screen = "quiz"; sim = null;
+    state = fresh(); state.screen = "quiz"; sim = null;
     closeGloss();
     render({ scroll: true });
+  }
+
+  let cardName = store.get("i101-name", "") || "";
+  function shareCardHTML(res) {
+    const d = cardData(res);
+    const date = new Date().toLocaleDateString("es-HN", { day: "numeric", month: "long", year: "numeric" });
+    return `
+      <div class="scard" id="scard">
+        <span class="ring a"></span><span class="ring b"></span>
+        <div class="scard-in">
+          <div class="sc-top">
+            <span class="sc-brand"><span class="sc-badge">101</span>Inversiones 101</span>
+            <span class="sc-date">${esc(date)}</span>
+          </div>
+          <p class="sc-who" id="sc-who">${cardName ? `<b>${esc(cardName)}</b> es` : "Mi estilo de inversión:"}</p>
+          <h3 class="sc-title${d.long ? " long" : ""}">Inversionista <span>${esc(d.title)}</span></h3>
+          <p class="sc-motto">${esc(d.motto)}</p>
+          <div class="sc-stats">
+            ${d.rows.map(r => `
+              <div class="sc-row${r.blend ? " blend" : ""}">
+                <div class="sc-head"><small>${esc(r.label)}</small><b>${esc(r.value)}</b><em>${r.blend ? "Blend" : r.pct + "%"}</em></div>
+                <div class="sc-bar"><i style="width:${r.pct}%"></i></div>
+              </div>`).join("")}
+          </div>
+          <div class="sc-foot"><span>Haz tu test en<br><b>test.inversiones101.lat</b></span><span class="sc-tag">#MiEstilo101</span></div>
+        </div>
+      </div>`;
+  }
+
+  function setMsg(t) { const c = $("copied"); if (c) c.textContent = t; }
+
+  // Convierte la tarjeta en PNG (1080 × 1350) con html2canvas, cargado solo al usarlo.
+  let h2cPromise = null;
+  function loadH2C() {
+    if (window.html2canvas) return Promise.resolve(window.html2canvas);
+    h2cPromise = h2cPromise || new Promise((ok, fail) => {
+      const sc = document.createElement("script");
+      sc.src = "https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js";
+      sc.onload = () => ok(window.html2canvas); sc.onerror = () => { h2cPromise = null; fail(new Error("load")); };
+      document.head.appendChild(sc);
+    });
+    return h2cPromise;
+  }
+  async function saveCard() {
+    const card = $("scard"); const btn = $("save-card");
+    if (!card || btn.disabled) return;
+    btn.disabled = true; setMsg("Preparando tu imagen…");
+    try {
+      const h2c = await loadH2C();
+      if (document.fonts?.ready) await document.fonts.ready;
+      const canvas = await h2c(card, {
+        scale: 1080 / card.offsetWidth, backgroundColor: "#03302A", useCORS: true, logging: false,
+        onclone: (doc) => { const c = doc.getElementById("scard"); c.style.borderRadius = "0"; c.style.boxShadow = "none"; c.style.border = "0"; }
+      });
+      const blob = await new Promise(r => canvas.toBlob(r, "image/png"));
+      const file = new File([blob], "mi-estilo-inversiones101.png", { type: "image/png" });
+      if (navigator.canShare && navigator.canShare({ files: [file] }) && /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        try { await navigator.share({ files: [file], title: "Mi estilo de inversión", text: "Mi estilo de inversión en Inversiones 101 #MiEstilo101" }); setMsg("Listo. Ahora publícala en la comunidad."); return; }
+        catch (e) { if (e && e.name === "AbortError") { setMsg(""); return; } }
+      }
+      const url = URL.createObjectURL(blob);
+      const a = document.createElement("a"); a.href = url; a.download = file.name;
+      document.body.appendChild(a); a.click(); a.remove();
+      setTimeout(() => URL.revokeObjectURL(url), 4000);
+      setMsg("Imagen guardada. Súbela a un post de la comunidad con #MiEstilo101.");
+    } catch {
+      setMsg("No se pudo guardar automáticamente. Toma una captura de pantalla de tu tarjeta.");
+    } finally { btn.disabled = false; }
   }
 
   function copyResult() {
     const res = computeResults(state.answers);
     const lines = Object.keys(CATS).map(k => `• ${CATS[k].name}: ${profileFor(k, res[k]).title}`);
-    const text = `🧭 Mi estilo de inversión (Test Inversiones 101):\n${lines.join("\n")}\n\n¿Y tú qué estilo tienes?`;
-    const done = (ok) => { const c = $("copied"); c.hidden = false; c.textContent = ok ? "Copiado. Pégalo en un post de la comunidad." : "No se pudo copiar automáticamente. Selecciona tu resultado arriba."; };
+    const text = `🧭 Mi estilo de inversión (Test Inversiones 101):\n${lines.join("\n")}\n\n¿Y tú qué estilo tienes? Haz el test en test.inversiones101.lat #MiEstilo101`;
+    const done = (ok) => setMsg(ok ? "Texto copiado. Pégalo en un post de la comunidad junto con tu imagen." : "No se pudo copiar automáticamente. Toma una captura de tu tarjeta.");
     try { navigator.clipboard.writeText(text).then(() => done(true), () => done(false)); } catch { done(false); }
   }
 
@@ -950,7 +1137,15 @@
     if (e.target.closest("#back")) return goBack();
     if (e.target.closest("#again")) return restart();
     if (e.target.closest("#copy")) return copyResult();
+    if (e.target.closest("#save-card")) return saveCard();
     if (e.target.closest("#gloss-inline")) return openGloss();
+  });
+  stage.addEventListener("input", (e) => {
+    if (e.target.id !== "card-name") return;
+    cardName = e.target.value.trim().slice(0, 24);
+    store.set("i101-name", cardName);
+    const who = $("sc-who");
+    if (who) who.innerHTML = cardName ? `<b>${esc(cardName)}</b> es` : "Mi estilo de inversión:";
   });
   stage.addEventListener("change", (e) => {
     const c = e.target.closest("input[type=checkbox][data-i]");
