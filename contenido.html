@@ -188,7 +188,8 @@
   .sc-row.blend .sc-bar i { background: linear-gradient(90deg, #E0A21B, #F2C25A); }
   .sc-foot { margin-top: 4.5cqw; padding-top: 3.5cqw; border-top: .3cqw solid rgba(242,243,238,.16); display: flex; justify-content: space-between; align-items: center; gap: 3cqw; font: 600 3cqw/1.2 var(--font-body); color: #A7BBB3; }
   .sc-foot b { color: #F2F3EE; }
-  .sc-tag { background: #A2E21A; color: #062A1F; font: 800 3cqw/1 var(--font-body); padding: 2cqw 3.2cqw; border-radius: 99px; white-space: nowrap; }
+  .sc-go { flex: none; width: 9cqw; height: 9cqw; border-radius: 50%; background: #A2E21A; display: grid; place-items: center; }
+  .sc-go svg { width: 4.2cqw; height: 4.2cqw; }
   @media (max-width: 760px) { .share { grid-template-columns: 1fr; } .scard { max-width: 440px; } }
 
   .section-title { font-size: clamp(1.5rem, 4.5vw, 2rem); margin-top: 44px; }
@@ -814,7 +815,7 @@
             <h2>Comparte tu estilo en la <span class="hl">comunidad</span></h2>
             <p>${anyBlend
               ? "En al menos una categoría tus respuestas quedaron empatadas: ahí tu perfil es Híbrido/Blend y combinas más de un enfoque. Es completamente válido."
-              : "Guarda tu tarjeta o tómale captura y publícala en Inversiones 101 con #MiEstilo101. Abajo tienes qué significa cada parte de tu resultado."}</p>
+              : "Guarda tu tarjeta o tómale captura y publícala en la comunidad de Inversiones 101. Abajo tienes qué significa cada parte de tu resultado."}</p>
             <div class="name-field">
               <label for="card-name">Tu nombre en la tarjeta (opcional)</label>
               <input id="card-name" type="text" maxlength="24" autocomplete="given-name" placeholder="Ej.: Ana" value="${esc(cardName)}">
@@ -1030,7 +1031,7 @@
                 <div class="sc-bar"><i style="width:${r.pct}%"></i></div>
               </div>`).join("")}
           </div>
-          <div class="sc-foot"><span>Haz tu test en<br><b>test.inversiones101.lat</b></span><span class="sc-tag">#MiEstilo101</span></div>
+          <div class="sc-foot"><span>Haz tu test en<br><b>test.inversiones101.lat</b></span><span class="sc-go"><svg viewBox="0 0 24 24" fill="none" stroke="#062A1F" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div>
         </div>
       </div>`;
   }
@@ -1063,14 +1064,14 @@
       const blob = await new Promise(r => canvas.toBlob(r, "image/png"));
       const file = new File([blob], "mi-estilo-inversiones101.png", { type: "image/png" });
       if (navigator.canShare && navigator.canShare({ files: [file] }) && /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) {
-        try { await navigator.share({ files: [file], title: "Mi estilo de inversión", text: "Mi estilo de inversión en Inversiones 101 #MiEstilo101" }); setMsg("Listo. Ahora publícala en la comunidad."); return; }
+        try { await navigator.share({ files: [file], title: "Mi estilo de inversión", text: "Mi estilo de inversión en Inversiones 101" }); setMsg("Listo. Ahora publícala en la comunidad."); return; }
         catch (e) { if (e && e.name === "AbortError") { setMsg(""); return; } }
       }
       const url = URL.createObjectURL(blob);
       const a = document.createElement("a"); a.href = url; a.download = file.name;
       document.body.appendChild(a); a.click(); a.remove();
       setTimeout(() => URL.revokeObjectURL(url), 4000);
-      setMsg("Imagen guardada. Súbela a un post de la comunidad con #MiEstilo101.");
+      setMsg("Imagen guardada. Súbela a un post de la comunidad.");
     } catch {
       setMsg("No se pudo guardar automáticamente. Toma una captura de pantalla de tu tarjeta.");
     } finally { btn.disabled = false; }
@@ -1079,7 +1080,7 @@
   function copyResult() {
     const res = computeResults(state.answers);
     const lines = Object.keys(CATS).map(k => `• ${CATS[k].name}: ${profileFor(k, res[k]).title}`);
-    const text = `🧭 Mi estilo de inversión (Test Inversiones 101):\n${lines.join("\n")}\n\n¿Y tú qué estilo tienes? Haz el test en test.inversiones101.lat #MiEstilo101`;
+    const text = `🧭 Mi estilo de inversión (Test Inversiones 101):\n${lines.join("\n")}\n\n¿Y tú qué estilo tienes? Haz el test en test.inversiones101.lat`;
     const done = (ok) => setMsg(ok ? "Texto copiado. Pégalo en un post de la comunidad junto con tu imagen." : "No se pudo copiar automáticamente. Toma una captura de tu tarjeta.");
     try { navigator.clipboard.writeText(text).then(() => done(true), () => done(false)); } catch { done(false); }
   }
